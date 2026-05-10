@@ -1,0 +1,171 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "03bad996dc942b4648cd",
+  "displayName": "Dashboard Ejecutivo",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "objects": {
+    "outspace": [
+      {
+        "properties": {
+          "image": {
+            "image": {
+              "name": {
+                "expr": {
+                  "Literal": {
+                    "Value": "''"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "Literal": {
+                    "Value": "''"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "background": [
+      {
+        "properties": {
+          "image": {
+            "image": {
+              "name": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#1.svg'"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "ResourcePackageItem": {
+                    "PackageName": "RegisteredResources",
+                    "PackageType": 1,
+                    "ItemName": "_135078566508648046.svg"
+                  }
+                }
+              },
+              "scaling": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Fill'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "0fe7a845851c90ee1a64",
+      "target": "1dc2bd0d82d0646900b9",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ffe0ea48bd4481a970d2",
+      "target": "9b1883a40ae53223ad9b",
+      "type": "NoFilter"
+    },
+    {
+      "source": "0d877004bc820270d5d8",
+      "target": "27aa8ac20129724cb0c9",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ffe0ea48bd4481a970d2",
+      "target": "80b8ee5d22e58da0a97d",
+      "type": "NoFilter"
+    },
+    {
+      "source": "589eeef9413349c5382b",
+      "target": "80b8ee5d22e58da0a97d",
+      "type": "NoFilter"
+    },
+    {
+      "source": "c76d5a878640bd931026",
+      "target": "80b8ee5d22e58da0a97d",
+      "type": "NoFilter"
+    },
+    {
+      "source": "0d877004bc820270d5d8",
+      "target": "80b8ee5d22e58da0a97d",
+      "type": "NoFilter"
+    },
+    {
+      "source": "1dc2bd0d82d0646900b9",
+      "target": "3c7fce32ddc1d9c7e57c",
+      "type": "NoFilter"
+    },
+    {
+      "source": "1dc2bd0d82d0646900b9",
+      "target": "9b1883a40ae53223ad9b",
+      "type": "NoFilter"
+    },
+    {
+      "source": "1dc2bd0d82d0646900b9",
+      "target": "27aa8ac20129724cb0c9",
+      "type": "NoFilter"
+    },
+    {
+      "source": "1dc2bd0d82d0646900b9",
+      "target": "80b8ee5d22e58da0a97d",
+      "type": "NoFilter"
+    },
+    {
+      "source": "9b1883a40ae53223ad9b",
+      "target": "80b8ee5d22e58da0a97d",
+      "type": "DataFilter"
+    },
+    {
+      "source": "9b1883a40ae53223ad9b",
+      "target": "27aa8ac20129724cb0c9",
+      "type": "NoFilter"
+    },
+    {
+      "source": "9b1883a40ae53223ad9b",
+      "target": "1dc2bd0d82d0646900b9",
+      "type": "NoFilter"
+    },
+    {
+      "source": "27aa8ac20129724cb0c9",
+      "target": "9b1883a40ae53223ad9b",
+      "type": "NoFilter"
+    },
+    {
+      "source": "27aa8ac20129724cb0c9",
+      "target": "1dc2bd0d82d0646900b9",
+      "type": "NoFilter"
+    },
+    {
+      "source": "27aa8ac20129724cb0c9",
+      "target": "80b8ee5d22e58da0a97d",
+      "type": "NoFilter"
+    },
+    {
+      "source": "27aa8ac20129724cb0c9",
+      "target": "3c7fce32ddc1d9c7e57c",
+      "type": "NoFilter"
+    },
+    {
+      "source": "9b1883a40ae53223ad9b",
+      "target": "3c7fce32ddc1d9c7e57c",
+      "type": "NoFilter"
+    }
+  ]
+}

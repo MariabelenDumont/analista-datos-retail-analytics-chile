@@ -1,0 +1,390 @@
+table Medidas
+	lineageTag: a82a454d-47a7-42cc-ab79-120074c2072c
+
+	measure 'Ventas Totales' = ```
+			
+			        SUM(fact_ventas[monto_total_clp])
+			```
+		formatString: #,0
+		displayFolder: Ventas
+		lineageTag: b4075529-e18e-4a5d-bec0-e8995dfd5f36
+
+	measure 'Número de Órdenes' = ```
+			
+			        COUNTROWS(fact_ventas)
+			```
+		formatString: 0
+		displayFolder: Ordenes
+		lineageTag: 41ec6cc0-2f6d-4c1f-b69f-95d7593c6158
+
+	measure 'Unidades Vendidas' = ```
+			
+			        SUM(fact_ventas[cantidad])
+			```
+		formatString: 0
+		lineageTag: 7fc1c8ff-b206-44f0-98f1-e733e2c57bbf
+
+	measure 'Clientes Únicos' = ```
+			
+			        DISTINCTCOUNT(fact_ventas[cliente_id])
+			```
+		formatString: 0
+		displayFolder: Clientes
+		lineageTag: 4b9418e2-8a36-42e8-b2d0-d56709195e9b
+
+	measure 'Ticket Promedio' = ```
+			
+			        DIVIDE(
+			            [Ventas Totales],
+			            [Número de Órdenes]
+			        )
+			```
+		displayFolder: Ticket
+		lineageTag: 7906e084-d606-4ab0-bb4d-2457f895a6f1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Descuento Promedio %' = ```
+			
+			        AVERAGE(fact_ventas[descuento_pct]) * 100
+			```
+		lineageTag: 084210fd-8e67-4b68-bc20-f9d79a35817c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Margen Bruto Total' = ```
+			
+			        SUM(fact_ventas[margen_bruto_clp])
+			```
+		formatString: 0
+		displayFolder: Margen
+		lineageTag: 885c823d-41e7-42ad-b2b2-7459d59ddd20
+
+	measure 'Margen Bruto %' = ```
+			
+			        DIVIDE(
+			            [Margen Bruto Total],
+			            [Ventas Totales]
+			        ) * 100
+			```
+		displayFolder: Margen
+		lineageTag: b3776c27-fe1d-48fc-8abb-4a25f52fcaf1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ventas YoY' = ```
+			
+			        CALCULATE(
+			            [Ventas Totales],
+			            DATEADD(dim_tiempo[fecha],-1,YEAR)
+			        )
+			```
+		formatString: 0
+		displayFolder: Ventas
+		lineageTag: 417bd7c9-0ca5-46bd-89c3-4da89005a8d8
+
+	measure 'Ventas YoY%' = ```
+			
+			        DIVIDE(
+			            [Ventas Totales] - [Ventas YoY],
+			            [Ventas YoY]
+			        )
+			```
+		displayFolder: Ventas
+		lineageTag: 6dfb5937-b80c-4baa-8ac1-f89ff349d43b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ventasf %YoY' = ```
+			
+			        VAR pct = [Ventas YoY%]
+			        RETURN
+			            IF(
+			                ISBLANK(pct),
+			                "Sin comparativo",
+			                IF(
+			                    pct >= 0,
+			                    "▲ " & FORMAT(pct, "0.0%"),
+			                    "▼ " & FORMAT(ABS(pct), "0.0%")
+			                )
+			            )
+			```
+		displayFolder: Ventas
+		lineageTag: 7f35e0a7-15b0-488b-8325-cff5a4424620
+
+	measure 'Órdenes Año Anterior' = ```
+			
+			        CALCULATE(
+			            [Número de Órdenes],
+			            SAMEPERIODLASTYEAR(dim_tiempo[fecha])
+			        )
+			```
+		formatString: 0
+		displayFolder: Ordenes
+		lineageTag: 685aea28-fd33-4ed6-a27a-cc48581442a8
+
+	measure 'Crecimiento Órdenes YoY %' = ```
+			
+			        DIVIDE(
+			            [Número de Órdenes] - [Órdenes Año Anterior],
+			            [Órdenes Año Anterior]
+			        )
+			```
+		displayFolder: Ordenes
+		lineageTag: 5a1bf3e7-1f3e-44d3-a33b-66867daf3809
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Ventas sobre Total' = ```
+			
+			        DIVIDE(
+			            [Ventas Totales],
+			            CALCULATE([Ventas Totales], ALLSELECTED(dim_cliente[segmento_rfm]) )
+			        )
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Ventas
+		lineageTag: 96f4bed4-7b3e-43be-b927-4a5736161fad
+
+	measure '% Acumulado Pareto' = ```
+			
+				VAR TotalVentas = CALCULATE( SUM(fact_ventas[monto_total_clp]), ALL(dim_producto) )
+				
+				VAR VentasActual = SUM(fact_ventas[monto_total_clp])
+				
+			    VAR TablaResumen =
+			        SUMMARIZE(
+			            ALLSELECTED(fact_ventas),
+			            dim_producto[nombre],
+			            "@ventas", SUM(fact_ventas[monto_total_clp])
+			        )
+			
+			    VAR Acumulado =
+			        SUMX(
+			            FILTER( TablaResumen, [@ventas] >= VentasActual ),
+			            [@ventas]
+			        )
+				RETURN
+					DIVIDE(acumulado,TotalVentas )
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Pareto
+		lineageTag: bf55441b-79b0-458a-8eb5-4668c98e3a55
+
+	measure 'Clasificación ABC' = ```
+			
+			        VAR pct = [% Acumulado Pareto]
+			        RETURN
+			            SWITCH(
+			                TRUE(),
+			                pct <= 0.80, "A",
+			                pct <= 0.95, "B",
+			                "C"
+			            )
+			```
+		displayFolder: Pareto
+		lineageTag: aa7fa30b-78de-43a9-8b77-426d5532b80f
+
+	measure 'Dólar Promedio Período' = ```
+			
+			        AVERAGE(fact_ventas[dolar_del_dia])
+			```
+		lineageTag: e47477fd-7d7e-4898-8d09-a956e576c918
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Euro Promedio Período' = ```
+			
+			        AVERAGE(fact_ventas[euro_del_dia])
+			```
+		lineageTag: 0c7c894c-7827-42a8-914c-d89da1a4f520
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'UF Promedio Período' = ```
+			
+			        AVERAGE(fact_ventas[uf_del_dia])
+			```
+		lineageTag: c89ab0a3-a33b-4381-be05-46d6c9b6741b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ventas Totales USD' = ```
+			
+			        SUMX(
+			            fact_ventas,
+			            fact_ventas[monto_usd]
+			        )
+			```
+		displayFolder: Ventas
+		lineageTag: 1a2235c6-b79e-41c7-8358-8656c54bba0e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ventas Totales UF' = ```
+			
+			        SUMX(
+			            fact_ventas,
+			            fact_ventas[monto_uf]
+			        )
+			```
+		displayFolder: Ventas
+		lineageTag: bdac1a88-901d-403e-81f2-ecfa6c6c9916
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ticket Promedio UF' = ```
+			
+			        DIVIDE(
+			            [Ventas Totales UF],
+			            [Número de Órdenes]
+			        )
+			```
+		displayFolder: Ticket
+		lineageTag: 0ac619f9-36e5-4be2-82a5-7e87ccad93cc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Clientes Champions' = ```
+			
+			        CALCULATE(
+			            DISTINCTCOUNT(fact_ventas[cliente_id]),
+			            dim_cliente[segmento_rfm] = "Champions"
+			        )
+			```
+		formatString: 0
+		displayFolder: Clientes
+		lineageTag: 79d16039-1596-44b6-8cf3-d824e0bc393c
+
+	measure 'Clientes At Risk' = ```
+			
+			        CALCULATE(
+			            DISTINCTCOUNT(fact_ventas[cliente_id]),
+			            dim_cliente[segmento_rfm] = "At Risk"
+			        )
+			```
+		formatString: 0
+		displayFolder: Clientes
+		lineageTag: ce8cb87e-b1aa-430c-9827-82c5a1c7153e
+
+	measure 'Clientes Nuevos' = ```
+			
+			        CALCULATE(
+			            DISTINCTCOUNT(fact_ventas[cliente_id]),
+			            dim_cliente[segmento_rfm] = "New"
+			        )
+			```
+		formatString: 0
+		displayFolder: Clientes
+		lineageTag: bbda8f9d-0347-42b1-8ce6-d2ac149d9304
+
+	measure 'LTV Promedio' = ```
+			
+			        DIVIDE(
+			            [Ventas Totales],
+			            [Clientes Únicos]
+			        )
+			```
+		lineageTag: ae589248-d715-4abf-91f5-da8821d2f7e4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Clientes Champions' = ```
+			
+			        DIVIDE(
+			            [Clientes Champions],
+			            [Clientes Únicos]
+			        ) * 100
+			```
+		displayFolder: Clientes
+		lineageTag: e6c8e8f2-da17-4cb5-9b9f-4352eb4bb733
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ventas Texto Formato' = ```
+			
+			        VAR v = [Ventas Totales]
+			        RETURN
+			            IF(
+			                v >= 1000000000,
+			                "$" & FORMAT(DIVIDE(v, 1000000000), "0.0") & "B",
+			                "$" & FORMAT(DIVIDE(v, 1000000), "0") & "M"
+			            )
+			```
+		displayFolder: Ventas
+		lineageTag: 2b2e7d70-71ed-4711-ae35-05b89e0be433
+
+	measure 'Título Dinámico Período' = ```
+			
+			"Periodo Seleccionado " &
+			        FORMAT(MIN(dim_tiempo[fecha]), "MMM YYYY")
+			        
+			            & " hasta "
+			            & FORMAT(MAX(dim_tiempo[fecha]), "MMM YYYY")
+			```
+		lineageTag: 103a157a-446e-4d76-beb6-7c3e12135ea7
+
+	measure 'Color KPI YoY ventas' = ```
+			
+			        IF([Ventas YoY%] >= 0, "#5aaa6e", "#e05c6a")
+			```
+		displayFolder: Ventas
+		lineageTag: 85abae25-4e14-4cfc-8dc9-6b67bf754b5b
+
+	measure 'Uplift vs Día Normal' =
+			
+			VAR ticket_evento =
+			    CALCULATE(
+			        [Ticket Promedio],
+			        dim_tiempo[evento_comercial] <> "Normal"
+			    )
+			VAR ticket_normal =
+			    CALCULATE(
+			        [Ticket Promedio],
+			        dim_tiempo[evento_comercial] = "Normal"
+			    )
+			RETURN
+			    DIVIDE(ticket_evento - ticket_normal, ticket_normal) * 100
+		lineageTag: 8abda94b-1b91-4429-ba27-2cf1bec443f3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Ventas Importados' = ```
+			
+			        DIVIDE(
+			            CALCULATE(
+			                [Ventas Totales],
+			                dim_producto[es_importado] = TRUE()
+			            ),
+			            [Ventas Totales]
+			        ) * 100
+			```
+		displayFolder: Ventas
+		lineageTag: a12067fd-aa2c-4ce3-a544-09b643dead32
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Margen Bruto USD' = ```
+			
+			        DIVIDE(
+			            [Margen Bruto Total],
+			            [Dólar Promedio Período]
+			        )
+			```
+		displayFolder: Margen
+		lineageTag: b0cbc63b-e9fd-4727-ae3d-14cbbf861f2e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Medidas = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

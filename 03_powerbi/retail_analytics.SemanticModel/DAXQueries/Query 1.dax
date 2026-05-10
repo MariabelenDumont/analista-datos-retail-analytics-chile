@@ -1,0 +1,247 @@
+// ============================================================
+// TechStore.cl — Medidas DAX en formato DAX Query
+// Pegar cada bloque en: Herramientas → Editor DAX
+// o en Nueva medida → pegar directamente
+// ============================================================
+// TABLA DESTINO: Medidas
+// ============================================================
+
+
+// ── GRUPO 1: VENTAS BASE ─────────────────────────────────────
+
+DEFINE
+    MEASURE Medidas[Ventas Totales] =
+        SUM(fact_ventas[monto_total_clp])
+
+    MEASURE Medidas[Número de Órdenes] =
+        COUNTROWS(fact_ventas)
+
+    MEASURE Medidas[Unidades Vendidas] =
+        SUM(fact_ventas[cantidad])
+
+    MEASURE Medidas[Clientes Únicos] =
+        DISTINCTCOUNT(fact_ventas[cliente_id])
+
+    MEASURE Medidas[Ticket Promedio] =
+        DIVIDE(
+            [Ventas Totales],
+            [Número de Órdenes]
+        )
+
+    MEASURE Medidas[Descuento Promedio %] =
+        AVERAGE(fact_ventas[descuento_pct]) * 100
+
+    MEASURE Medidas[Margen Bruto Total] =
+        SUM(fact_ventas[margen_bruto_clp])
+
+    MEASURE Medidas[Margen Bruto %] =
+        DIVIDE(
+            [Margen Bruto Total],
+            [Ventas Totales]
+        ) * 100
+
+EVALUATE { 1 }
+
+
+// ── GRUPO 2: AÑO A AÑO YoY ──────────────────────────────────
+
+DEFINE
+    MEASURE Medidas[Ventas Año Anterior] =
+        CALCULATE(
+            [Ventas Totales],
+            SAMEPERIODLASTYEAR(dim_tiempo[fecha])
+        )
+
+    MEASURE Medidas[Crecimiento YoY %] =
+        DIVIDE(
+            [Ventas Totales] - [Ventas Año Anterior],
+            [Ventas Año Anterior]
+        )
+
+    MEASURE Medidas[Crecimiento YoY Texto] =
+        VAR pct = [Crecimiento YoY %]
+        RETURN
+            IF(
+                ISBLANK(pct),
+                "Sin comparativo",
+                IF(
+                    pct >= 0,
+                    "▲ " & FORMAT(pct, "0.0%"),
+                    "▼ " & FORMAT(ABS(pct), "0.0%")
+                )
+            )
+
+    MEASURE Medidas[Órdenes Año Anterior] =
+        CALCULATE(
+            [Número de Órdenes],
+            SAMEPERIODLASTYEAR(dim_tiempo[fecha])
+        )
+
+    MEASURE Medidas[Crecimiento Órdenes YoY %] =
+        DIVIDE(
+            [Número de Órdenes] - [Órdenes Año Anterior],
+            [Órdenes Año Anterior]
+        )
+
+EVALUATE { 1 }
+
+
+// ── GRUPO 3: PARETO ABC ──────────────────────────────────────
+
+DEFINE
+    MEASURE Medidas[% Ventas sobre Total] =
+        DIVIDE(
+            [Ventas Totales],
+            CALCULATE([Ventas Totales], ALL(fact_ventas))
+        )
+
+    MEASURE Medidas[% Acumulado Pareto] =
+        VAR VentasActual = [Ventas Totales]
+        VAR VentasMayores =
+            CALCULATE(
+                [Ventas Totales],
+                FILTER(
+                    ALL(dim_producto[producto_id], dim_producto[nombre]),
+                    [Ventas Totales] >= VentasActual
+                )
+            )
+        RETURN
+            DIVIDE(
+                VentasMayores,
+                CALCULATE([Ventas Totales], ALL(fact_ventas))
+            )
+
+    MEASURE Medidas[Clasificación ABC] =
+        VAR pct = [% Acumulado Pareto]
+        RETURN
+            SWITCH(
+                TRUE(),
+                pct <= 0.80, "A",
+                pct <= 0.95, "B",
+                "C"
+            )
+
+EVALUATE { 1 }
+
+
+// ── GRUPO 4: MACROECONÓMICO ──────────────────────────────────
+// Usan las columnas calculadas de fact_ventas:
+// dolar_del_dia · euro_del_dia · uf_del_dia · monto_usd · monto_uf
+
+DEFINE
+    MEASURE Medidas[Dólar Promedio Período] =
+        AVERAGE(fact_ventas[dolar_del_dia])
+
+    MEASURE Medidas[Euro Promedio Período] =
+        AVERAGE(fact_ventas[euro_del_dia])
+
+    MEASURE Medidas[UF Promedio Período] =
+        AVERAGE(fact_ventas[uf_del_dia])
+
+    MEASURE Medidas[Ventas Totales USD] =
+        SUMX(
+            fact_ventas,
+            fact_ventas[monto_usd]
+        )
+
+    MEASURE Medidas[Ventas Totales UF] =
+        SUMX(
+            fact_ventas,
+            fact_ventas[monto_uf]
+        )
+
+    MEASURE Medidas[Ticket Promedio UF] =
+        DIVIDE(
+            [Ventas Totales UF],
+            [Número de Órdenes]
+        )
+
+EVALUATE { 1 }
+
+
+// ── GRUPO 5: RFM Y CLIENTES ──────────────────────────────────
+
+DEFINE
+    MEASURE Medidas[Clientes Champions] =
+        CALCULATE(
+            DISTINCTCOUNT(fact_ventas[cliente_id]),
+            dim_cliente[segmento_rfm] = "Champions"
+        )
+
+    MEASURE Medidas[Clientes At Risk] =
+        CALCULATE(
+            DISTINCTCOUNT(fact_ventas[cliente_id]),
+            dim_cliente[segmento_rfm] = "At Risk"
+        )
+
+    MEASURE Medidas[Clientes Nuevos] =
+        CALCULATE(
+            DISTINCTCOUNT(fact_ventas[cliente_id]),
+            dim_cliente[segmento_rfm] = "New"
+        )
+
+    MEASURE Medidas[LTV Promedio] =
+        DIVIDE(
+            [Ventas Totales],
+            [Clientes Únicos]
+        )
+
+    MEASURE Medidas[% Clientes Champions] =
+        DIVIDE(
+            [Clientes Champions],
+            [Clientes Únicos]
+        ) * 100
+
+EVALUATE { 1 }
+
+
+// ── GRUPO 6: FORMATO Y UX ────────────────────────────────────
+
+DEFINE
+    MEASURE Medidas[Ventas Texto Formato] =
+        VAR v = [Ventas Totales]
+        RETURN
+            IF(
+                v >= 1000000000,
+                "$" & FORMAT(DIVIDE(v, 1000000000), "0.0") & "B",
+                "$" & FORMAT(DIVIDE(v, 1000000), "0") & "M"
+            )
+
+    MEASURE Medidas[Título Dinámico Período] =
+        FORMAT(MIN(dim_tiempo[fecha]), "MMM YYYY")
+            & " – "
+            & FORMAT(MAX(dim_tiempo[fecha]), "MMM YYYY")
+
+    MEASURE Medidas[Color KPI YoY] =
+        IF([Crecimiento YoY %] >= 0, "#5aaa6e", "#e05c6a")
+
+    MEASURE Medidas[Uplift vs Día Normal] =
+        VAR ticket_evento =
+            CALCULATE(
+                [Ticket Promedio],
+                dim_tiempo[evento_comercial] <> "Normal"
+            )
+        VAR ticket_normal =
+            CALCULATE(
+                [Ticket Promedio],
+                dim_tiempo[evento_comercial] = "Normal"
+            )
+        RETURN
+            DIVIDE(ticket_evento - ticket_normal, ticket_normal) * 100
+
+    MEASURE Medidas[% Ventas Importados] =
+        DIVIDE(
+            CALCULATE(
+                [Ventas Totales],
+                dim_producto[es_importado] = TRUE()
+            ),
+            [Ventas Totales]
+        ) * 100
+
+    MEASURE Medidas[Margen Bruto USD] =
+        DIVIDE(
+            [Margen Bruto Total],
+            [Dólar Promedio Período]
+        )
+
+EVALUATE { 1 }

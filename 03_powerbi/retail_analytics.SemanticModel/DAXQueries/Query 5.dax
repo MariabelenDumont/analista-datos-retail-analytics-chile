@@ -1,0 +1,36 @@
+DEFINE
+MEASURE 'Medidas'[% Acumulado Pareto_test] =
+    VAR TotalVentas =
+        CALCULATE( SUM(fact_ventas[monto_total_clp]), ALLSELECTED(fact_ventas) )
+
+    VAR VentasActual =
+        SUM(fact_ventas[monto_total_clp])
+
+    VAR TablaResumen =
+        SUMMARIZE(
+            ALLSELECTED(fact_ventas),       -- ← tabla de hechos, no dim_producto
+            dim_producto[nombre],
+            "@ventas", SUM(fact_ventas[monto_total_clp])
+        )
+
+    VAR Acumulado =
+        SUMX(
+            FILTER( TablaResumen, [@ventas] >= VentasActual ),
+            [@ventas]
+        )
+
+    RETURN
+        DIVIDE( Acumulado, TotalVentas )
+
+
+EVALUATE
+CALCULATETABLE(
+    SUMMARIZE(
+        ALLSELECTED(fact_ventas),           -- ← misma lógica que adentro
+        dim_producto[nombre],
+        "MontoCLP",  SUM(fact_ventas[monto_total_clp]),
+        "Acumulado %", [% Acumulado Pareto]
+    ),
+    dim_tiempo[año] = 2025
+)
+ORDER BY [Acumulado %] DESC

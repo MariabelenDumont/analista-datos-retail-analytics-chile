@@ -1,0 +1,28 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-CL
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["dim_cliente","dim_indicadores_economicos","dim_producto","dim_tiempo","fact_ventas","Medidas"]
+
+annotation PBI_ProTooling = ["DevMode","DaxQueryView_Desktop"]
+
+annotation PBI_RemovedChildren = [{"remoteItemId":{"foreignKeyRelationship":{"fromTableLocalLineageTag":"bacb277f-0e5b-4a7d-8485-e55812b282ae","fromColumnLocalLineageTag":"53a423d3-b368-4a7a-9d9a-b2f298291385","toTableLocalLineageTag":"11bee4dd-27cf-4218-9779-bd050b4dd899","toColumnLocalLineageTag":"d2368587-0ec7-4748-a469-636a39a438b3"}},"objectType":"Relationship"},{"remoteItemId":{"foreignKeyRelationship":{"fromTableLocalLineageTag":"70846a7c-e058-4360-9781-d4821d810a37","fromColumnLocalLineageTag":"97a8d003-9e37-4fa0-b178-3111e0e644a0","toTableLocalLineageTag":"bacb277f-0e5b-4a7d-8485-e55812b282ae","toColumnLocalLineageTag":"53a423d3-b368-4a7a-9d9a-b2f298291385"}},"objectType":"Relationship"}]
+
+ref table dim_cliente
+ref table DateTableTemplate_30a735d5-d180-4d82-a788-8c7ca2271a3a
+ref table LocalDateTable_88bfb396-86a5-4a41-b2ae-483c74e7a9aa
+ref table dim_indicadores_economicos
+ref table dim_producto
+ref table dim_tiempo
+ref table LocalDateTable_c4a7113d-86d3-4f34-b56e-19c173811ed4
+ref table fact_ventas
+ref table Medidas
+
+ref cultureInfo en-US
+

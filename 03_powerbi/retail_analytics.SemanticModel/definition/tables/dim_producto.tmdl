@@ -1,0 +1,98 @@
+table dim_producto
+	lineageTag: 0778fda7-ef2a-4f08-9400-202c29e8b7d8
+
+	column producto_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 24015c9f-897e-44a0-a229-dc9a16f67a82
+		summarizeBy: none
+		sourceColumn: producto_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku
+		dataType: string
+		lineageTag: 2d7d9e12-fc5b-4ce3-b4cc-c13c1d8cb458
+		summarizeBy: none
+		sourceColumn: sku
+
+		annotation SummarizationSetBy = Automatic
+
+	column nombre
+		dataType: string
+		lineageTag: 654a01d2-c76b-422d-92c4-7743d743b5ef
+		summarizeBy: none
+		sourceColumn: nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column categoria
+		dataType: string
+		lineageTag: 95a4f291-0586-41f8-913f-c264f87b789a
+		summarizeBy: none
+		sourceColumn: categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column subcategoria
+		dataType: string
+		lineageTag: a925d546-6085-441b-b35a-e40df036dc40
+		summarizeBy: none
+		sourceColumn: subcategoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column marca
+		dataType: string
+		lineageTag: ba791522-345c-48c8-8170-77b8f248c47f
+		summarizeBy: none
+		sourceColumn: marca
+
+		annotation SummarizationSetBy = Automatic
+
+	column precio_lista_clp
+		dataType: int64
+		formatString: 0
+		lineageTag: b24c4042-e6e8-4c5b-ad00-5e280031a89e
+		summarizeBy: none
+		sourceColumn: precio_lista_clp
+
+		annotation SummarizationSetBy = Automatic
+
+	column costo_unitario_clp
+		dataType: int64
+		formatString: 0
+		lineageTag: 62c4c627-dee0-4f6e-a94c-e11463c0cb6c
+		summarizeBy: none
+		sourceColumn: costo_unitario_clp
+
+		annotation SummarizationSetBy = Automatic
+
+	column es_importado
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 629f5a75-67e5-42a9-ade2-b7a2988bc69c
+		summarizeBy: none
+		sourceColumn: es_importado
+
+		annotation SummarizationSetBy = Automatic
+
+	column pais_origen
+		dataType: string
+		lineageTag: f825cc52-f18a-4b9a-a574-4398c6599484
+		summarizeBy: none
+		sourceColumn: pais_origen
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_producto = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "portfolio_data_analytics"),
+				    retail_dim_producto = Source{[Schema="retail",Item="dim_producto"]}[Data]
+				in
+				    retail_dim_producto
+
+	annotation PBI_ResultType = Table
+

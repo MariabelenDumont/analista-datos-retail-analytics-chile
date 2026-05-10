@@ -1,0 +1,30 @@
+relationship e23e3be8-f250-4be7-bbf4-6ad5d3618474
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_cliente.fecha_registro
+	toColumn: LocalDateTable_88bfb396-86a5-4a41-b2ae-483c74e7a9aa.Date
+
+relationship 2ea112dd-61bf-4cdf-9b28-29c5810ac6a6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_tiempo.fecha
+	toColumn: LocalDateTable_c4a7113d-86d3-4f34-b56e-19c173811ed4.Date
+
+relationship a93f5369-8b57-463d-bfcd-2b197c6a0661
+	fromColumn: fact_ventas.cliente_id
+	toColumn: dim_cliente.cliente_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship f8b9ee1f-3f0c-47bd-900d-645138f17074
+	fromColumn: fact_ventas.producto_id
+	toColumn: dim_producto.producto_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 2149283e-d9bb-324d-81ca-896bcaf3b852
+	fromColumn: fact_ventas.fecha_id
+	toColumn: dim_indicadores_economicos.fecha_id
+
+relationship c4c31702-dad2-3944-f7d4-2faba4770245
+	fromColumn: fact_ventas.'retail.dim_tiempo.fecha'
+	toColumn: dim_tiempo.fecha
+

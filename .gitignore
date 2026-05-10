@@ -1,0 +1,33 @@
+# Credenciales — nunca subir a GitHub
+.env
+
+# Claude Code — configuración local de la herramienta
+.claude/
+
+# Logs de ejecución ETL
+logs/
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Power BI caché local
+03_powerbi/**/.pbi/cache.abf
+03_powerbi/**/.pbi/localSettings.json
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Entornos virtuales
+venv/
+.venv/
+env/

@@ -1,0 +1,181 @@
+table fact_ventas
+	lineageTag: 70846a7c-e058-4360-9781-d4821d810a37
+
+	column venta_id
+		dataType: int64
+		formatString: 0
+		lineageTag: ea86b1e4-d267-411c-8593-020f1df7d61f
+		summarizeBy: sum
+		sourceColumn: venta_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 97a8d003-9e37-4fa0-b178-3111e0e644a0
+		summarizeBy: none
+		sourceColumn: fecha_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column cliente_id
+		dataType: int64
+		formatString: 0
+		lineageTag: adf7c0d5-e377-437c-996e-8ad40e9239a6
+		summarizeBy: none
+		sourceColumn: cliente_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column producto_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f2cf7cc1-d47c-4b7d-98f4-c95ff6916190
+		summarizeBy: none
+		sourceColumn: producto_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column cantidad
+		dataType: int64
+		formatString: 0
+		lineageTag: 08ea92e5-a01f-40c2-b037-3d73187935de
+		summarizeBy: sum
+		sourceColumn: cantidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column precio_unitario_clp
+		dataType: int64
+		formatString: 0
+		lineageTag: 1e853434-c4f9-436d-8ca2-1550da9667cf
+		summarizeBy: sum
+		sourceColumn: precio_unitario_clp
+
+		annotation SummarizationSetBy = Automatic
+
+	column descuento_pct
+		dataType: double
+		lineageTag: 0e1f4981-8f4a-466b-9ba8-c0235cea41d4
+		summarizeBy: sum
+		sourceColumn: descuento_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column monto_total_clp
+		dataType: int64
+		formatString: 0
+		lineageTag: 0e0bf33a-742b-4b65-8d17-f4831d716c18
+		summarizeBy: sum
+		sourceColumn: monto_total_clp
+
+		annotation SummarizationSetBy = Automatic
+
+	column canal_venta
+		dataType: string
+		lineageTag: 8df6b59a-3a7b-488c-8aad-6555167e64fa
+		summarizeBy: none
+		sourceColumn: canal_venta
+
+		annotation SummarizationSetBy = Automatic
+
+	column metodo_pago
+		dataType: string
+		lineageTag: b4ab215d-ec07-48ce-a9b5-f8c77c17b072
+		summarizeBy: none
+		sourceColumn: metodo_pago
+
+		annotation SummarizationSetBy = Automatic
+
+	column dolar_del_dia = ```
+			
+			    RELATED('dim_indicadores_economicos'[dolar])
+			```
+		lineageTag: 6892486c-a74b-4ad1-85e7-48feb2bcc299
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column euro_del_dia = ```
+			
+			    RELATED('dim_indicadores_economicos'[euro])
+			```
+		lineageTag: 527b3f00-763a-4920-9fa0-4f1f08fdd4cd
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column uf_del_dia = ```
+			
+			    RELATED(dim_indicadores_economicos[uf])
+			```
+		lineageTag: 5fd16cf7-99db-42da-9586-4ff5b6d96636
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column margen_bruto_clp = ```
+			
+			    fact_ventas[monto_total_clp]
+			        - ( RELATED(dim_producto[costo_unitario_clp])
+			            * fact_ventas[cantidad] )
+			```
+		lineageTag: efee1c47-487d-4e09-b168-79f298aeab39
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column monto_usd = ```
+			
+			    DIVIDE(
+			        fact_ventas[monto_total_clp],
+			        fact_ventas[dolar_del_dia]
+			    )
+			```
+		lineageTag: 14dae98f-c5cc-4950-945d-3841e9109066
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column monto_uf = ```
+			
+			    DIVIDE(
+			        fact_ventas[monto_total_clp],
+			        fact_ventas[uf_del_dia]
+			    )
+			```
+		lineageTag: 22042fc4-8752-48a1-8099-0748557ab91e
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'retail.dim_tiempo.fecha'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d34c3ba6-4eeb-4c0d-85ac-758fb070040c
+		summarizeBy: none
+		sourceColumn: retail.dim_tiempo.fecha
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition fact_ventas = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "portfolio_data_analytics"),
+				    retail_fact_ventas = Source{[Schema="retail",Item="fact_ventas"]}[Data],
+				    #"Expanded retail.dim_tiempo" = Table.ExpandRecordColumn(retail_fact_ventas, "retail.dim_tiempo", {"fecha"}, {"retail.dim_tiempo.fecha"})
+				in
+				    #"Expanded retail.dim_tiempo"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

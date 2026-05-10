@@ -1,0 +1,100 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 70.688750329754114,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1498.8116253356641,
+            "y": 161.09645746146782
+          },
+          "nodeIndex": "Medidas",
+          "nodeLineageTag": "a82a454d-47a7-42cc-ab79-120074c2072c",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 1041.1882194937261,
+            "y": 423.69377555512318
+          },
+          "nodeIndex": "dim_cliente",
+          "nodeLineageTag": "56f5d0c9-4c6e-4e48-8474-c998e6db573b",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 810.37212818487956,
+            "y": 53.269004951908542
+          },
+          "nodeIndex": "dim_indicadores_economicos",
+          "nodeLineageTag": "11bee4dd-27cf-4218-9779-bd050b4dd899",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 171.168898391499,
+            "y": 110.26545619012586
+          },
+          "nodeIndex": "dim_producto",
+          "nodeLineageTag": "0778fda7-ef2a-4f08-9400-202c29e8b7d8",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 506.10718092041077,
+            "y": 42.918169843064987
+          },
+          "nodeIndex": "dim_tiempo",
+          "nodeLineageTag": "bacb277f-0e5b-4a7d-8485-e55812b282ae",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 532.81030581773621,
+            "y": 528.09013144781215
+          },
+          "nodeIndex": "fact_ventas",
+          "nodeLineageTag": "70846a7c-e058-4360-9781-d4821d810a37",
+          "size": {
+            "height": 260.868727496029,
+            "width": 234
+          },
+          "zIndex": 4
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 79.220526234750309,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

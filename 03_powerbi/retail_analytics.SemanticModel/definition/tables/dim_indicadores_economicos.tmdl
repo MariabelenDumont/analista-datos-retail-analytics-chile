@@ -1,0 +1,92 @@
+table dim_indicadores_economicos
+	lineageTag: 11bee4dd-27cf-4218-9779-bd050b4dd899
+
+	column fecha_id
+		dataType: int64
+		formatString: 0
+		lineageTag: d2368587-0ec7-4748-a469-636a39a438b3
+		summarizeBy: none
+		sourceColumn: fecha_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column uf
+		dataType: double
+		lineageTag: a46b34fe-0003-4cb7-8fa2-d1c048d05a11
+		summarizeBy: none
+		sourceColumn: uf
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column dolar
+		dataType: double
+		lineageTag: 32a8d8d0-f99b-438b-b20a-5ed7a01f52fc
+		summarizeBy: none
+		sourceColumn: dolar
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column euro
+		dataType: double
+		lineageTag: e4440155-ce6e-4301-b77e-45e9ddfd459c
+		summarizeBy: none
+		sourceColumn: euro
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ipc_mensual
+		dataType: double
+		lineageTag: 6ba422f3-0eb2-4a66-9687-c939ba708b4a
+		summarizeBy: none
+		sourceColumn: ipc_mensual
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column utm
+		dataType: int64
+		formatString: 0
+		lineageTag: 615caffb-6560-4c6a-8856-bee18fc24968
+		summarizeBy: none
+		sourceColumn: utm
+
+		annotation SummarizationSetBy = Automatic
+
+	column tasa_desempleo
+		dataType: double
+		lineageTag: 8fcf717b-7d1d-4726-90d1-6a9b10644c92
+		summarizeBy: none
+		sourceColumn: tasa_desempleo
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column imacec
+		dataType: double
+		lineageTag: 7851429d-7bf9-4700-93c2-eafe37e3c3bf
+		summarizeBy: none
+		sourceColumn: imacec
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition dim_indicadores_economicos = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "portfolio_data_analytics"),
+				    retail_dim_indicadores_economicos = Source{[Schema="retail",Item="dim_indicadores_economicos"]}[Data]
+				in
+				    retail_dim_indicadores_economicos
+
+	annotation PBI_ResultType = Table
+

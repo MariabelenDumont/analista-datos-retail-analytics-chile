@@ -1,0 +1,101 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "3e04fe8f2e5be870aa67",
+  "position": {
+    "x": 68.229426433915208,
+    "y": 486.58354114713217,
+    "z": 5000,
+    "height": 213.66583541147131,
+    "width": 456.95760598503739,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_cliente"
+                    }
+                  },
+                  "Property": "segmento_rfm"
+                }
+              },
+              "queryRef": "dim_cliente.segmento_rfm",
+              "nativeQueryRef": "segmento_rfm",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "Clientes Únicos"
+                }
+              },
+              "queryRef": "Medidas.Clientes Únicos",
+              "nativeQueryRef": "Clientes Únicos"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "LTV Promedio"
+                }
+              },
+              "queryRef": "Medidas.LTV Promedio",
+              "nativeQueryRef": "LTV Promedio"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "Ventas Totales"
+                }
+              },
+              "queryRef": "Medidas.Ventas Totales",
+              "nativeQueryRef": "V Total",
+              "displayName": "V Total"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "% Ventas sobre Total"
+                }
+              },
+              "queryRef": "Medidas.% Ventas sobre Total",
+              "nativeQueryRef": "% V Total",
+              "displayName": "% V Total"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

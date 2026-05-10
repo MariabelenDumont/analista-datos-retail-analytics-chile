@@ -1,0 +1,141 @@
+table dim_tiempo
+	lineageTag: bacb277f-0e5b-4a7d-8485-e55812b282ae
+
+	column fecha_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 53a423d3-b368-4a7a-9d9a-b2f298291385
+		summarizeBy: sum
+		sourceColumn: fecha_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 13d87f99-df90-458d-9fb9-7a63cd33863b
+		summarizeBy: none
+		sourceColumn: fecha
+
+		variation Variation
+			isDefault
+			relationship: 2ea112dd-61bf-4cdf-9b28-29c5810ac6a6
+			defaultHierarchy: LocalDateTable_c4a7113d-86d3-4f34-b56e-19c173811ed4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column año
+		dataType: int64
+		formatString: 0
+		lineageTag: ed393e0e-e2ea-49c6-8e64-f903c09e5162
+		summarizeBy: none
+		sourceColumn: año
+
+		annotation SummarizationSetBy = User
+
+	column trimestre
+		dataType: int64
+		formatString: 0
+		lineageTag: 8941fd4c-a6d1-433c-afc5-6f6a04a7e1ab
+		summarizeBy: none
+		sourceColumn: trimestre
+
+		annotation SummarizationSetBy = User
+
+	column mes
+		dataType: int64
+		formatString: 0
+		lineageTag: 3045fbb3-54a7-4693-a6c1-e0e9427c6acd
+		summarizeBy: none
+		sourceColumn: mes
+
+		annotation SummarizationSetBy = User
+
+	column nombre_mes
+		dataType: string
+		lineageTag: 0a3519a8-53e8-4e80-98fe-9010059c4dfc
+		summarizeBy: none
+		sourceColumn: nombre_mes
+		sortByColumn: mes
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column dia
+		dataType: int64
+		formatString: 0
+		lineageTag: fd889265-6fe7-4d7f-b6ac-74652c23b20f
+		summarizeBy: none
+		sourceColumn: dia
+
+		annotation SummarizationSetBy = User
+
+	column nombre_dia_semana
+		dataType: string
+		lineageTag: 836fff64-6ebe-4dea-8121-dccca83a27ee
+		summarizeBy: none
+		sourceColumn: nombre_dia_semana
+
+		annotation SummarizationSetBy = Automatic
+
+	column numero_dia_semana
+		dataType: int64
+		formatString: 0
+		lineageTag: 45abbfc3-4c50-492d-9bb1-787db18a9184
+		summarizeBy: none
+		sourceColumn: numero_dia_semana
+
+		annotation SummarizationSetBy = User
+
+	column es_fin_semana
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: df2b9cc7-bfd9-4104-b809-38281fc5481e
+		summarizeBy: none
+		sourceColumn: es_fin_semana
+
+		annotation SummarizationSetBy = Automatic
+
+	column es_feriado
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f5abc3cf-4fe0-47cb-b6db-5d3f7ede1ac1
+		summarizeBy: none
+		sourceColumn: es_feriado
+
+		annotation SummarizationSetBy = Automatic
+
+	column evento_comercial
+		dataType: string
+		lineageTag: 6c50ab79-87d8-430c-a276-e0de9ba45cca
+		summarizeBy: none
+		sourceColumn: evento_comercial
+
+		annotation SummarizationSetBy = Automatic
+
+	column semana_año
+		dataType: int64
+		formatString: 0
+		lineageTag: 339c161b-3a5a-45a5-a320-e9020a40b9b4
+		summarizeBy: none
+		sourceColumn: semana_año
+
+		annotation SummarizationSetBy = User
+
+	partition dim_tiempo = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "portfolio_data_analytics"),
+				    retail_dim_tiempo = Source{[Schema="retail",Item="dim_tiempo"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(retail_dim_tiempo,{{"año", Int64.Type}, {"trimestre", Int64.Type}, {"mes", Int64.Type}, {"dia", Int64.Type}, {"numero_dia_semana", Int64.Type}, {"semana_año", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

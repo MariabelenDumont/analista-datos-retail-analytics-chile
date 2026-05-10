@@ -1,0 +1,122 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "197e6c3740ad1dc32706",
+  "displayName": "Macroeconómico & Clientes",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "image": {
+            "image": {
+              "name": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#2.svg'"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "ResourcePackageItem": {
+                    "PackageName": "RegisteredResources",
+                    "PackageType": 1,
+                    "ItemName": "_23603418924310029.svg"
+                  }
+                }
+              },
+              "scaling": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Fill'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "e0f3343070bd239078e4",
+      "target": "54c196e76814d1234ee4",
+      "type": "NoFilter"
+    },
+    {
+      "source": "e0f3343070bd239078e4",
+      "target": "3e04fe8f2e5be870aa67",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ccd5245020a900ee93db",
+      "target": "54c196e76814d1234ee4",
+      "type": "DataFilter"
+    },
+    {
+      "source": "a68e38eeb6a7dd6d8107",
+      "target": "54c196e76814d1234ee4",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a68e38eeb6a7dd6d8107",
+      "target": "ccd5245020a900ee93db",
+      "type": "NoFilter"
+    },
+    {
+      "source": "3e04fe8f2e5be870aa67",
+      "target": "54c196e76814d1234ee4",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "3e04fe8f2e5be870aa67",
+      "target": "ccd5245020a900ee93db",
+      "type": "NoFilter"
+    },
+    {
+      "source": "3e04fe8f2e5be870aa67",
+      "target": "a68e38eeb6a7dd6d8107",
+      "type": "NoFilter"
+    },
+    {
+      "source": "54c196e76814d1234ee4",
+      "target": "ccd5245020a900ee93db",
+      "type": "NoFilter"
+    },
+    {
+      "source": "54c196e76814d1234ee4",
+      "target": "a68e38eeb6a7dd6d8107",
+      "type": "NoFilter"
+    },
+    {
+      "source": "54c196e76814d1234ee4",
+      "target": "3e04fe8f2e5be870aa67",
+      "type": "NoFilter"
+    },
+    {
+      "source": "1c35738171d7568850d1",
+      "target": "54c196e76814d1234ee4",
+      "type": "NoFilter"
+    },
+    {
+      "source": "1c35738171d7568850d1",
+      "target": "a68e38eeb6a7dd6d8107",
+      "type": "NoFilter"
+    },
+    {
+      "source": "213fbf19dd337060500e",
+      "target": "a68e38eeb6a7dd6d8107",
+      "type": "NoFilter"
+    }
+  ]
+}

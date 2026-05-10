@@ -1,0 +1,10 @@
+Lo que tiene el script extract_mindicador_api.py
+Manejo de errores → si la API falla, avisa y sigue con las demás columnas
+
+Forward-fill inteligente → los fines de semana y feriados heredan el último valor hábil
+
+Backward-fill para el 1-ene → si es feriado, toma el primer valor disponible del año
+
+Validación automática → chequea rangos razonables y avisa si algo está fuera de lo esperado
+
+fecha_id sincronizado con dim_tiempo.csv para el JOIN en PostgreSQL

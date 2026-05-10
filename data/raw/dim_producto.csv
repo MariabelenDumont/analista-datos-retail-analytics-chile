@@ -1,0 +1,151 @@
+producto_id,sku,nombre,categoria,subcategoria,marca,precio_lista_clp,costo_unitario_clp,es_importado,pais_origen
+1,LAP-0001,Apple Ultrabooks Mini 2024,Laptops,Ultrabooks,Apple,1592000,1242000,True,China/Taiwan
+2,LAP-0002,Dell Gaming Laptops Air 2022,Laptops,Gaming Laptops,Dell,2683000,2092500,True,China/Taiwan
+3,LAP-0003,Apple 2 en 1 S 2025,Laptops,2 en 1,Apple,926000,722500,True,China/Taiwan
+4,LAP-0004,Apple Ultrabooks Plus 2023,Laptops,Ultrabooks,Apple,627000,489000,True,China/Taiwan
+5,LAP-0005,ASUS Gaming Laptops S 2022,Laptops,Gaming Laptops,ASUS,2283000,1780500,True,China/Taiwan
+6,LAP-0006,Dell 2 en 1 Mini 2025,Laptops,2 en 1,Dell,513000,400000,True,China/Taiwan
+7,LAP-0007,Lenovo Gaming Laptops S 2024,Laptops,Gaming Laptops,Lenovo,2989000,2331500,True,China/Taiwan
+8,LAP-0008,Acer Ultrabooks 2023,Laptops,Ultrabooks,Acer,1005000,784000,True,China/Taiwan
+9,LAP-0009,HP Chromebooks Ultra 2023,Laptops,Chromebooks,HP,1378000,1075000,True,China/Taiwan
+10,LAP-0010,Acer Gaming Laptops Lite 2022,Laptops,Gaming Laptops,Acer,1767000,1378500,True,China/Taiwan
+11,LAP-0011,Lenovo Ultrabooks Plus 2024,Laptops,Ultrabooks,Lenovo,2316000,1806500,True,China/Taiwan
+12,LAP-0012,ASUS Workstations Ultra 2022,Laptops,Workstations,ASUS,1341000,1046000,True,China/Taiwan
+13,LAP-0013,ASUS Chromebooks Plus 2025,Laptops,Chromebooks,ASUS,1841000,1436000,True,China/Taiwan
+14,LAP-0014,ASUS Ultrabooks Ultra 2024,Laptops,Ultrabooks,ASUS,1059000,826000,True,China/Taiwan
+15,LAP-0015,Dell 2 en 1 Mini 2022,Laptops,2 en 1,Dell,2257000,1760500,True,China/Taiwan
+16,LAP-0016,MSI Ultrabooks Max 2024,Laptops,Ultrabooks,MSI,2303000,1796500,True,China/Taiwan
+17,LAP-0017,Acer Ultrabooks Max 2022,Laptops,Ultrabooks,Acer,648000,505500,True,China/Taiwan
+18,LAP-0018,HP Chromebooks Neo 2024,Laptops,Chromebooks,HP,3395000,2648000,True,China/Taiwan
+19,LAP-0019,HP Gaming Laptops Lite 2023,Laptops,Gaming Laptops,HP,1379000,1075500,True,China/Taiwan
+20,LAP-0020,MSI Workstations One 2022,Laptops,Workstations,MSI,2537000,1979000,True,China/Taiwan
+21,LAP-0021,MSI 2 en 1 Air 2023,Laptops,2 en 1,MSI,822000,641000,True,China/Taiwan
+22,LAP-0022,Lenovo Gaming Laptops SE 2024,Laptops,Gaming Laptops,Lenovo,555000,433000,True,China/Taiwan
+23,LAP-0023,Dell 2 en 1 One 2024,Laptops,2 en 1,Dell,1239000,966500,True,China/Taiwan
+24,LAP-0024,Dell Ultrabooks Pro 2024,Laptops,Ultrabooks,Dell,1401000,1093000,True,China/Taiwan
+25,LAP-0025,HP Chromebooks Plus 2023,Laptops,Chromebooks,HP,2117000,1651500,True,China/Taiwan
+26,LAP-0026,MSI 2 en 1 Lite 2023,Laptops,2 en 1,MSI,3407000,2657500,True,China/Taiwan
+27,LAP-0027,Lenovo Chromebooks One 2025,Laptops,Chromebooks,Lenovo,3315000,2585500,True,China/Taiwan
+28,LAP-0028,HP Gaming Laptops Air 2023,Laptops,Gaming Laptops,HP,2274000,1773500,True,China/Taiwan
+29,LAP-0029,ASUS 2 en 1 Ultra 2025,Laptops,2 en 1,ASUS,720000,561500,True,China/Taiwan
+30,LAP-0030,Lenovo 2 en 1 Lite 2023,Laptops,2 en 1,Lenovo,588000,458500,True,China/Taiwan
+31,SMA-0031,Realme Gama Media Neo 2022,Smartphones,Gama Media,Realme,749000,539500,True,China/Corea del Sur
+32,SMA-0032,Apple Gama Alta Air 2023,Smartphones,Gama Alta,Apple,1505000,1083500,True,China/Corea del Sur
+33,SMA-0033,Realme Reacondicionados Plus 2025,Smartphones,Reacondicionados,Realme,563000,405500,True,China/Corea del Sur
+34,SMA-0034,Realme Reacondicionados Neo 2024,Smartphones,Reacondicionados,Realme,322000,232000,True,China/Corea del Sur
+35,SMA-0035,OPPO Gama Alta Mini 2022,Smartphones,Gama Alta,OPPO,208000,150000,True,China/Corea del Sur
+36,SMA-0036,OPPO Gama Baja Lite 2022,Smartphones,Gama Baja,OPPO,1408000,1014000,True,China/Corea del Sur
+37,SMA-0037,Motorola Gama Baja Air 2025,Smartphones,Gama Baja,Motorola,89000,64000,True,China/Corea del Sur
+38,SMA-0038,OPPO Gama Alta Mini 2024,Smartphones,Gama Alta,OPPO,1296000,933000,True,China/Corea del Sur
+39,SMA-0039,Realme Gama Media Plus 2024,Smartphones,Gama Media,Realme,1407000,1013000,True,China/Corea del Sur
+40,SMA-0040,Samsung Gama Media Lite 2023,Smartphones,Gama Media,Samsung,697000,502000,True,China/Corea del Sur
+41,SMA-0041,Realme Gama Alta Lite 2025,Smartphones,Gama Alta,Realme,1565000,1127000,True,China/Corea del Sur
+42,SMA-0042,Apple Gama Alta Lite 2024,Smartphones,Gama Alta,Apple,649000,467500,True,China/Corea del Sur
+43,SMA-0043,Apple Gama Media Max 2022,Smartphones,Gama Media,Apple,615000,443000,True,China/Corea del Sur
+44,SMA-0044,OPPO Gama Alta Neo 2022,Smartphones,Gama Alta,OPPO,1335000,961000,True,China/Corea del Sur
+45,SMA-0045,Samsung Gama Media One 2025,Smartphones,Gama Media,Samsung,1606000,1156500,True,China/Corea del Sur
+46,SMA-0046,Xiaomi Gama Media X 2025,Smartphones,Gama Media,Xiaomi,286000,206000,True,China/Corea del Sur
+47,SMA-0047,Realme Gama Media 2023,Smartphones,Gama Media,Realme,1389000,1000000,True,China/Corea del Sur
+48,SMA-0048,Motorola Gama Baja One 2024,Smartphones,Gama Baja,Motorola,1406000,1012500,True,China/Corea del Sur
+49,SMA-0049,Realme Reacondicionados Neo 2022,Smartphones,Reacondicionados,Realme,979000,705000,True,China/Corea del Sur
+50,SMA-0050,Samsung Gama Media Plus 2024,Smartphones,Gama Media,Samsung,124000,89500,True,China/Corea del Sur
+51,SMA-0051,Realme Gama Alta X 2023,Smartphones,Gama Alta,Realme,134000,96500,True,China/Corea del Sur
+52,SMA-0052,Apple Gama Media Plus 2022,Smartphones,Gama Media,Apple,621000,447000,True,China/Corea del Sur
+53,SMA-0053,Apple Gama Media Pro 2024,Smartphones,Gama Media,Apple,1641000,1181500,True,China/Corea del Sur
+54,SMA-0054,Realme Gama Alta Max 2024,Smartphones,Gama Alta,Realme,786000,566000,True,China/Corea del Sur
+55,SMA-0055,Samsung Reacondicionados X 2023,Smartphones,Reacondicionados,Samsung,474000,341500,True,China/Corea del Sur
+56,SMA-0056,Samsung Reacondicionados 2025,Smartphones,Reacondicionados,Samsung,578000,416000,True,China/Corea del Sur
+57,SMA-0057,Samsung Reacondicionados Plus 2022,Smartphones,Reacondicionados,Samsung,1679000,1209000,True,China/Corea del Sur
+58,SMA-0058,Xiaomi Reacondicionados SE 2025,Smartphones,Reacondicionados,Xiaomi,1169000,841500,True,China/Corea del Sur
+59,SMA-0059,OPPO Reacondicionados Pro 2022,Smartphones,Reacondicionados,OPPO,1462000,1052500,True,China/Corea del Sur
+60,SMA-0060,Motorola Gama Alta Mini 2024,Smartphones,Gama Alta,Motorola,1615000,1163000,True,China/Corea del Sur
+61,SMA-0061,Samsung Gama Alta Max 2023,Smartphones,Gama Alta,Samsung,1469000,1057500,True,China/Corea del Sur
+62,SMA-0062,Samsung Reacondicionados SE 2023,Smartphones,Reacondicionados,Samsung,627000,451500,True,China/Corea del Sur
+63,SMA-0063,Motorola Gama Baja Max 2022,Smartphones,Gama Baja,Motorola,472000,340000,True,China/Corea del Sur
+64,SMA-0064,Realme Reacondicionados Plus 2022,Smartphones,Reacondicionados,Realme,1487000,1070500,True,China/Corea del Sur
+65,SMA-0065,Apple Gama Alta 2023,Smartphones,Gama Alta,Apple,92000,66000,True,China/Corea del Sur
+66,ACC-0066,Ugreen Cases y Fundas Neo 2025,Accesorios,Cases y Fundas,Ugreen,52000,27000,True,China
+67,ACC-0067,Generic Cases y Fundas SE 2022,Accesorios,Cases y Fundas,Generic,17000,9000,True,China
+68,ACC-0068,Ugreen Cases y Fundas Pro 2025,Accesorios,Cases y Fundas,Ugreen,113000,59000,True,China
+69,ACC-0069,Generic Teclados y Mouse 2025,Accesorios,Teclados y Mouse,Generic,64000,33500,True,China
+70,ACC-0070,Ugreen Teclados y Mouse Mini 2025,Accesorios,Teclados y Mouse,Ugreen,46000,24000,True,China
+71,ACC-0071,Belkin Cases y Fundas Ultra 2023,Accesorios,Cases y Fundas,Belkin,116000,60500,True,China
+72,ACC-0072,WD Cables y Cargadores Mini 2022,Accesorios,Cables y Cargadores,WD,61000,31500,True,China
+73,ACC-0073,Logitech Pendrives Pro 2022,Accesorios,Pendrives,Logitech,36000,18500,True,China
+74,ACC-0074,Ugreen Hubs USB X 2023,Accesorios,Hubs USB,Ugreen,74000,38500,True,China
+75,ACC-0075,WD Cables y Cargadores Plus 2023,Accesorios,Cables y Cargadores,WD,9000,4500,True,China
+76,ACC-0076,WD Cables y Cargadores Plus 2023,Accesorios,Cables y Cargadores,WD,109000,56500,True,China
+77,ACC-0077,Anker Webcams S 2023,Accesorios,Webcams,Anker,20000,10500,True,China
+78,ACC-0078,WD Hubs USB Pro 2022,Accesorios,Hubs USB,WD,118000,61500,True,China
+79,ACC-0079,Kingston Webcams S 2024,Accesorios,Webcams,Kingston,82000,42500,True,China
+80,ACC-0080,Belkin Teclados y Mouse One 2024,Accesorios,Teclados y Mouse,Belkin,31000,16000,True,China
+81,ACC-0081,Logitech Cases y Fundas SE 2023,Accesorios,Cases y Fundas,Logitech,46000,24000,True,China
+82,ACC-0082,Kingston Pendrives Ultra 2025,Accesorios,Pendrives,Kingston,77000,40000,True,China
+83,ACC-0083,Generic Teclados y Mouse Plus 2022,Accesorios,Teclados y Mouse,Generic,14000,7500,True,China
+84,ACC-0084,WD Webcams S 2022,Accesorios,Webcams,WD,41000,21500,True,China
+85,ACC-0085,WD Cables y Cargadores Max 2024,Accesorios,Cables y Cargadores,WD,8000,4000,True,China
+86,ACC-0086,Logitech Cases y Fundas Plus 2023,Accesorios,Cases y Fundas,Logitech,82000,42500,True,China
+87,ACC-0087,Logitech Teclados y Mouse Air 2025,Accesorios,Teclados y Mouse,Logitech,63000,33000,True,China
+88,ACC-0088,Kingston Hubs USB Ultra 2022,Accesorios,Hubs USB,Kingston,78000,40500,True,China
+89,ACC-0089,Generic Pendrives X 2024,Accesorios,Pendrives,Generic,84000,43500,True,China
+90,ACC-0090,Anker Pendrives Air 2024,Accesorios,Pendrives,Anker,113000,59000,True,China
+91,ACC-0091,Anker Cables y Cargadores Mini 2023,Accesorios,Cables y Cargadores,Anker,43000,22500,True,China
+92,ACC-0092,Logitech Teclados y Mouse S 2023,Accesorios,Teclados y Mouse,Logitech,111000,57500,True,China
+93,ACC-0093,Logitech Pendrives Max 2024,Accesorios,Pendrives,Logitech,33000,17000,True,China
+94,ACC-0094,Ugreen Hubs USB Ultra 2022,Accesorios,Hubs USB,Ugreen,99000,51500,True,China
+95,ACC-0095,Kingston Cables y Cargadores SE 2024,Accesorios,Cables y Cargadores,Kingston,65000,34000,True,China
+96,ACC-0096,Anker Cables y Cargadores Lite 2023,Accesorios,Cables y Cargadores,Anker,14000,7500,True,China
+97,ACC-0097,Logitech Pendrives Air 2025,Accesorios,Pendrives,Logitech,108000,56000,True,China
+98,ACC-0098,Kingston Hubs USB SE 2022,Accesorios,Hubs USB,Kingston,43000,22500,True,China
+99,ACC-0099,Anker Cables y Cargadores Mini 2023,Accesorios,Cables y Cargadores,Anker,88000,46000,True,China
+100,ACC-0100,Anker Hubs USB Lite 2023,Accesorios,Hubs USB,Anker,107000,55500,True,China
+101,ACC-0101,Belkin Webcams Pro 2024,Accesorios,Webcams,Belkin,78000,40500,True,China
+102,ACC-0102,Generic Teclados y Mouse Pro 2024,Accesorios,Teclados y Mouse,Generic,22000,11500,True,China
+103,ACC-0103,Kingston Cases y Fundas Max 2022,Accesorios,Cases y Fundas,Kingston,74000,38500,True,China
+104,ACC-0104,Generic Teclados y Mouse X 2025,Accesorios,Teclados y Mouse,Generic,15000,8000,True,China
+105,ACC-0105,Kingston Hubs USB Air 2023,Accesorios,Hubs USB,Kingston,4000,2000,True,China
+106,GAM-0106,HyperX Sillas Gaming SE 2022,Gaming,Sillas Gaming,HyperX,505000,338500,True,China/USA
+107,GAM-0107,SteelSeries Sillas Gaming Lite 2025,Gaming,Sillas Gaming,SteelSeries,595000,398500,True,China/USA
+108,GAM-0108,Corsair Sillas Gaming Air 2022,Gaming,Sillas Gaming,Corsair,648000,434000,True,China/USA
+109,GAM-0109,Razer Controles Neo 2023,Gaming,Controles,Razer,310000,207500,True,China/USA
+110,GAM-0110,Secretlab Sillas Gaming Lite 2024,Gaming,Sillas Gaming,Secretlab,593000,397500,True,China/USA
+111,GAM-0111,HyperX Sillas Gaming Pro 2023,Gaming,Sillas Gaming,HyperX,600000,402000,True,China/USA
+112,GAM-0112,Corsair Controles Ultra 2022,Gaming,Controles,Corsair,107000,71500,True,China/USA
+113,GAM-0113,Corsair Monitores Gaming One 2025,Gaming,Monitores Gaming,Corsair,257000,172000,True,China/USA
+114,GAM-0114,Corsair Escritorios Gaming Pro 2022,Gaming,Escritorios Gaming,Corsair,876000,587000,True,China/USA
+115,GAM-0115,HyperX Monitores Gaming S 2024,Gaming,Monitores Gaming,HyperX,806000,540000,True,China/USA
+116,GAM-0116,Razer Headsets Gaming S 2025,Gaming,Headsets Gaming,Razer,720000,482500,True,China/USA
+117,GAM-0117,SteelSeries Monitores Gaming 2024,Gaming,Monitores Gaming,SteelSeries,530000,355000,True,China/USA
+118,GAM-0118,Logitech G Controles X 2022,Gaming,Controles,Logitech G,196000,131500,True,China/USA
+119,GAM-0119,Logitech G Controles Max 2024,Gaming,Controles,Logitech G,271000,181500,True,China/USA
+120,GAM-0120,SteelSeries Headsets Gaming SE 2022,Gaming,Headsets Gaming,SteelSeries,590000,395500,True,China/USA
+121,GAM-0121,Logitech G Escritorios Gaming One 2023,Gaming,Escritorios Gaming,Logitech G,848000,568000,True,China/USA
+122,GAM-0122,Secretlab Monitores Gaming Plus 2024,Gaming,Monitores Gaming,Secretlab,826000,553500,True,China/USA
+123,GAM-0123,Corsair Escritorios Gaming One 2022,Gaming,Escritorios Gaming,Corsair,39000,26000,True,China/USA
+124,GAM-0124,Logitech G Monitores Gaming Ultra 2025,Gaming,Monitores Gaming,Logitech G,400000,268000,True,China/USA
+125,GAM-0125,Secretlab Monitores Gaming Mini 2024,Gaming,Monitores Gaming,Secretlab,868000,581500,True,China/USA
+126,GAM-0126,HyperX Escritorios Gaming Max 2025,Gaming,Escritorios Gaming,HyperX,283000,189500,True,China/USA
+127,GAM-0127,SteelSeries Controles Mini 2023,Gaming,Controles,SteelSeries,770000,516000,True,China/USA
+128,GAM-0128,Logitech G Escritorios Gaming Ultra 2025,Gaming,Escritorios Gaming,Logitech G,173000,116000,True,China/USA
+129,GAM-0129,Razer Escritorios Gaming Ultra 2024,Gaming,Escritorios Gaming,Razer,844000,565500,True,China/USA
+130,GAM-0130,Secretlab Sillas Gaming 2024,Gaming,Sillas Gaming,Secretlab,524000,351000,True,China/USA
+131,AUD-0131,Apple Soundbars Neo 2023,Audio,Soundbars,Apple,436000,296500,True,China/Japón
+132,AUD-0132,Apple Micrófonos 2023,Audio,Micrófonos,Apple,111000,75500,True,China/Japón
+133,AUD-0133,Bose Audífonos Over-ear X 2024,Audio,Audífonos Over-ear,Bose,616000,419000,True,China/Japón
+134,AUD-0134,Audio-Technica Audífonos Over-ear 2023,Audio,Audífonos Over-ear,Audio-Technica,492000,334500,True,China/Japón
+135,AUD-0135,JBL Parlantes Portátiles 2023,Audio,Parlantes Portátiles,JBL,261000,177500,True,China/Japón
+136,AUD-0136,Sony Auriculares TWS Pro 2023,Audio,Auriculares TWS,Sony,569000,387000,True,China/Japón
+137,AUD-0137,Jabra Soundbars 2022,Audio,Soundbars,Jabra,609000,414000,True,China/Japón
+138,AUD-0138,Apple Soundbars One 2023,Audio,Soundbars,Apple,365000,248000,True,China/Japón
+139,AUD-0139,Apple Soundbars SE 2023,Audio,Soundbars,Apple,562000,382000,True,China/Japón
+140,AUD-0140,Marshall Auriculares TWS Mini 2022,Audio,Auriculares TWS,Marshall,496000,337500,True,China/Japón
+141,AUD-0141,Audio-Technica Audífonos Over-ear SE 2023,Audio,Audífonos Over-ear,Audio-Technica,625000,425000,True,China/Japón
+142,AUD-0142,Audio-Technica Auriculares TWS Mini 2025,Audio,Auriculares TWS,Audio-Technica,272000,185000,True,China/Japón
+143,AUD-0143,Jabra Audífonos Over-ear Max 2022,Audio,Audífonos Over-ear,Jabra,411000,279500,True,China/Japón
+144,AUD-0144,JBL Soundbars 2025,Audio,Soundbars,JBL,334000,227000,True,China/Japón
+145,AUD-0145,Jabra Micrófonos S 2024,Audio,Micrófonos,Jabra,211000,143500,True,China/Japón
+146,AUD-0146,Jabra Soundbars Mini 2025,Audio,Soundbars,Jabra,36000,24500,True,China/Japón
+147,AUD-0147,Apple Micrófonos Air 2025,Audio,Micrófonos,Apple,578000,393000,True,China/Japón
+148,AUD-0148,Bose Soundbars 2023,Audio,Soundbars,Bose,102000,69500,True,China/Japón
+149,AUD-0149,Audio-Technica Parlantes Portátiles 2025,Audio,Parlantes Portátiles,Audio-Technica,542000,368500,True,China/Japón
+150,AUD-0150,Bose Auriculares TWS Neo 2022,Audio,Auriculares TWS,Bose,442000,300500,True,China/Japón

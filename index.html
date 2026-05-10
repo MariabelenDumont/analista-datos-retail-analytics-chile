@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Analista de Datos Chile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════ */
+:root {
+  --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
+  --text-sm:   clamp(0.875rem, 0.8rem  + 0.35vw, 1rem);
+  --text-base: clamp(1rem,     0.95rem + 0.25vw, 1.125rem);
+  --text-lg:   clamp(1.125rem, 1rem    + 0.75vw, 1.5rem);
+  --text-xl:   clamp(1.5rem,   1.2rem  + 1.25vw, 2.25rem);
+  --text-2xl:  clamp(2rem,     1.2rem  + 2.5vw,  3.5rem);
+  --text-hero: clamp(2.8rem,   0.5rem  + 6vw,    6.5rem);
+
+  --space-1:0.25rem;--space-2:0.5rem;--space-3:0.75rem;--space-4:1rem;
+  --space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;--space-12:3rem;
+  --space-16:4rem;--space-20:5rem;--space-24:6rem;
+
+  --radius-sm:0.375rem;--radius-md:0.5rem;--radius-lg:0.75rem;
+  --radius-xl:1rem;--radius-2xl:1.5rem;--radius-full:9999px;
+
+  --font-display:'Instrument Serif',Georgia,serif;
+  --font-body:'DM Sans','Helvetica Neue',sans-serif;
+  --font-code:'JetBrains Mono','Courier New',monospace;
+
+  --ease-out: cubic-bezier(0.16,1,0.3,1);
+  --transition: 200ms var(--ease-out);
+  --content: 1000px;
+  --content-wide: 1200px;
+}
+
+/* Dark mode (default) */
+[data-theme="dark"] {
+  --bg:        #0c0e14;
+  --bg-2:      #111318;
+  --surface:   #161a24;
+  --surface-2: #1c2130;
+  --surface-3: #222840;
+  --border:    rgba(255,255,255,0.08);
+  --border-2:  rgba(255,255,255,0.04);
+  --text:      #e8eaf0;
+  --text-2:    #8b92a8;
+  --text-3:    #3e4560;
+  --teal:      #50a0ae;
+  --teal-dim:  rgba(80,160,174,0.12);
+  --teal-glow: rgba(80,160,174,0.06);
+  --amber:     #f6a832;
+  --amber-dim: rgba(246,168,50,0.12);
+  --green:     #5aaa6e;
+  --green-dim: rgba(90,170,110,0.12);
+  --red:       #e05c6a;
+  --shadow:    0 4px 24px rgba(0,0,0,0.5);
+  --shadow-lg: 0 16px 64px rgba(0,0,0,0.6);
+}
+
+[data-theme="light"] {
+  --bg:        #f5f4f0;
+  --bg-2:      #ffffff;
+  --surface:   #ffffff;
+  --surface-2: #f0ede8;
+  --surface-3: #e8e4de;
+  --border:    rgba(0,0,0,0.08);
+  --border-2:  rgba(0,0,0,0.04);
+  --text:      #1a1d28;
+  --text-2:    #5a6070;
+  --text-3:    #a0a8b8;
+  --teal:      #0a717a;
+  --teal-dim:  rgba(10,113,122,0.08);
+  --teal-glow: rgba(10,113,122,0.04);
+  --amber:     #a05a00;
+  --amber-dim: rgba(160,90,0,0.08);
+  --green:     #3a7a4a;
+  --green-dim: rgba(58,122,74,0.08);
+  --red:       #b03040;
+  --shadow:    0 4px 16px rgba(0,0,0,0.08);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+}
+
+/* ═══════════════════════════════════════════
+   BASE
+═══════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:85px;-webkit-font-smoothing:antialiased}
+body{font-family:var(--font-body);font-size:var(--text-base);color:var(--text);background:var(--bg);line-height:1.65;min-height:100dvh}
+img{display:block;max-width:100%;height:auto}
+a{color:var(--teal);text-decoration:none;transition:color var(--transition)}
+a:hover{opacity:0.8}
+button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
+
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:var(--space-1);
+  padding:var(--space-3) var(--space-8);
+  background:color-mix(in oklch,var(--bg) 80%,transparent);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:var(--font-display);font-size:clamp(1.5rem,1.2rem + 1vw,2rem);color:var(--text)}
+.nav-logo b{color:var(--teal)}
+.nav-right{display:flex;align-items:center;gap:var(--space-6)}
+.nav-links{display:flex;gap:var(--space-6)}
+.nav-links a{font-size:var(--text-sm);color:var(--text-2);font-weight:500;transition:color var(--transition)}
+.nav-links a:hover{color:var(--teal)}
+.theme-btn{
+  width:34px;height:34px;border-radius:var(--radius-full);
+  border:1px solid var(--border);
+  display:grid;place-items:center;color:var(--text-2);
+  transition:all var(--transition);
+}
+.theme-btn:hover{border-color:var(--teal);color:var(--teal)}
+
+/* ═══════════════════════════════════════════
+   BOTONES
+═══════════════════════════════════════════ */
+.btn{
+  display:inline-flex;align-items:center;gap:var(--space-2);
+  padding:0.55rem 1.3rem;border-radius:var(--radius-full);
+  font-size:var(--text-sm);font-weight:600;
+  transition:all var(--transition);cursor:pointer;
+}
+.btn-primary{background:var(--teal);color:#fff}
+.btn-primary:hover{opacity:0.88;transform:translateY(-1px);color:#fff}
+.btn-ghost{
+  border:1px solid var(--border);color:var(--text-2);
+  background:transparent;
+}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s var(--ease-out),transform 0.7s var(--ease-out)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+.reveal-delay-4{transition-delay:0.4s}
+
+/* ═══════════════════════════════════════════
+   CONTAINER
+═══════════════════════════════════════════ */
+.container{max-width:var(--content);margin:0 auto;padding:0 var(--space-8)}
+.container-wide{max-width:var(--content-wide);margin:0 auto;padding:0 var(--space-8)}
+
+/* ═══════════════════════════════════════════
+   SECCIÓN BASE
+═══════════════════════════════════════════ */
+.section{padding:clamp(var(--space-16),8vw,var(--space-24)) 0}
+.section-alt{background:var(--bg-2)}
+
+.section-eyebrow{
+  display:inline-flex;align-items:center;gap:var(--space-2);
+  font-size:var(--text-xs);font-weight:700;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--teal);margin-bottom:var(--space-4);
+}
+.section-eyebrow::before{content:'';width:20px;height:2px;background:var(--teal);border-radius:2px}
+
+.section-title{
+  font-family:var(--font-display);
+  font-size:var(--text-2xl);line-height:1.1;
+  letter-spacing:-0.02em;color:var(--text);
+  margin-bottom:var(--space-4);
+}
+.section-title em{color:var(--teal);font-style:italic}
+
+.section-desc{
+  font-size:var(--text-base);color:var(--text-2);
+  max-width:58ch;margin-bottom:var(--space-12);
+  line-height:1.7;
+}
+
+/* Callout "Lo que esto significa" */
+.impact-box{
+  margin-top:var(--space-8);
+  border:1px solid rgba(80,160,174,0.25);
+  background:var(--teal-dim);
+  border-radius:var(--radius-lg);
+  padding:var(--space-5) var(--space-6);
+  display:flex;align-items:flex-start;gap:var(--space-4);
+}
+.impact-icon{font-size:1.4rem;flex-shrink:0;margin-top:2px}
+.impact-label{font-size:var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal);margin-bottom:4px}
+.impact-text{font-size:var(--text-sm);color:var(--text-2);line-height:1.6;max-width:65ch}
+
+/* ═══════════════════════════════════════════
+   HERO — FOLD 0
+═══════════════════════════════════════════ */
+.hero{
+  min-height:100dvh;
+  display:flex;align-items:center;justify-content:center;
+  padding:calc(var(--space-20) + 85px) var(--space-8) var(--space-20);
+  position:relative;overflow:hidden;
+}
+.hero-noise{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:0.025;
+}
+.hero-glow{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 45%, rgba(80,160,174,0.07) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 30% at 20% 70%, rgba(246,168,50,0.04) 0%, transparent 60%);
+}
+.hero-grid-lines{
+  position:absolute;inset:0;pointer-events:none;
+  opacity:0.03;
+  background-image:
+    linear-gradient(var(--text) 1px,transparent 1px),
+    linear-gradient(90deg,var(--text) 1px,transparent 1px);
+  background-size:48px 48px;
+}
+.hero-content{max-width:820px;position:relative;z-index:1}
+.hero-kicker{
+  display:inline-flex;align-items:center;gap:var(--space-3);
+  font-size:var(--text-xs);font-weight:700;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--teal);
+  margin-bottom:var(--space-6);
+}
+.kicker-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+.hero-title{
+  font-family:var(--font-display);
+  font-size:var(--text-hero);line-height:1.05;
+  letter-spacing:-0.03em;color:var(--text);
+  margin-bottom:var(--space-6);
+}
+.hero-title em{color:var(--teal);font-style:italic}
+.hero-title .accent{color:var(--amber)}
+
+.hero-sub{
+  font-size:var(--text-lg);color:var(--text-2);
+  max-width:55ch;margin-bottom:var(--space-8);line-height:1.55;
+}
+
+.hero-actions{display:flex;gap:var(--space-3);flex-wrap:wrap;margin-bottom:var(--space-12)}
+
+/* Stats bar bajo hero */
+.hero-stats{
+  display:flex;gap:var(--space-8);flex-wrap:wrap;
+  padding-top:var(--space-8);
+  border-top:1px solid var(--border);
+}
+.hero-stat{}
+.hero-stat-val{
+  font-family:var(--font-display);font-size:var(--text-xl);
+  font-weight:700;color:var(--text);line-height:1;
+  margin-bottom:4px;font-variant-numeric:tabular-nums;
+}
+.hero-stat-val.teal{color:var(--teal)}
+.hero-stat-val.amber{color:var(--amber)}
+.hero-stat-label{font-size:var(--text-xs);color:var(--text-2)}
+
+/* Scroll cue */
+.scroll-cue{
+  position:absolute;bottom:var(--space-8);left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:var(--space-2);
+  font-size:var(--text-xs);color:var(--text-3);letter-spacing:0.05em;
+  animation:bounce 2.5s ease-in-out infinite;
+}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+.scroll-arrow{width:20px;height:20px;border-right:2px solid var(--text-3);border-bottom:2px solid var(--text-3);transform:rotate(45deg)}
+
+/* ═══════════════════════════════════════════
+   SECCIÓN 1 — DASHBOARD PBI
+═══════════════════════════════════════════ */
+.dashboard-wrap{
+  border-radius:var(--radius-2xl);
+  border:1px solid var(--border);
+  overflow:hidden;
+  box-shadow:var(--shadow-lg);
+  background:var(--surface);
+}
+.dashboard-titlebar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:var(--space-4) var(--space-6);
+  background:var(--surface-2);
+  border-bottom:1px solid var(--border);
+}
+.titlebar-dots{display:flex;gap:6px}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot-r{background:#e05c6a}.dot-y{background:#f6a832}.dot-g{background:#5aaa6e}
+.titlebar-label{font-size:var(--text-xs);color:var(--text-3);font-family:var(--font-code)}
+
+/* Grid del dashboard simulado */
+.dashboard-body{
+  padding:var(--space-6);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-template-rows:auto auto auto;
+  gap:var(--space-4);
+}
+.pbi-embed{position:relative;width:100%;padding-bottom:62.25%;height:0;overflow:hidden}
+.pbi-embed iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.db-kpi{
+  background:var(--surface-2);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:var(--space-4) var(--space-5);
+}
+.db-kpi-val{font-family:var(--font-display);font-size:var(--text-xl);font-weight:700;color:var(--text);margin-bottom:4px;font-variant-numeric:tabular-nums}
+.db-kpi-label{font-size:10px;color:var(--text-2);text-transform:uppercase;letter-spacing:0.06em}
+.db-kpi-delta{font-size:10px;margin-top:var(--space-2);padding:2px 8px;border-radius:var(--radius-full);display:inline-block;font-weight:700}
+.delta-up{background:var(--green-dim);color:var(--green)}
+.delta-neu{background:var(--amber-dim);color:var(--amber)}
+
+/* Gráfico de barras inline */
+.db-chart-bar{
+  grid-column:span 2;
+  background:var(--surface-2);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:var(--space-4) var(--space-5);
+}
+.db-chart-title{font-size:11px;color:var(--text-2);font-weight:600;margin-bottom:var(--space-4)}
+.bars-container{display:flex;align-items:flex-end;gap:4px;height:80px}
+.db-bar{flex:1;border-radius:3px 3px 0 0;background:var(--teal);opacity:0.5;transition:opacity var(--transition);position:relative}
+.db-bar:hover{opacity:0.9}
+.db-bar.highlight{opacity:1;background:var(--amber)}
+.db-bar-tip{
+  position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);
+  background:var(--surface-3);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:2px 6px;
+  font-size:9px;color:var(--text);white-space:nowrap;
+  opacity:0;pointer-events:none;transition:opacity var(--transition);
+}
+.db-bar:hover .db-bar-tip{opacity:1}
+
+/* Pareto línea */
+.db-chart-pareto{
+  grid-column:span 2;
+  background:var(--surface-2);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:var(--space-4) var(--space-5);
+}
+
+/* Tabla mini */
+.db-table{
+  grid-column:span 2;
+  background:var(--surface-2);border:1px solid var(--border);
+  border-radius:var(--radius-lg);overflow:hidden;
+}
+.db-table-head{
+  display:grid;grid-template-columns:2fr 1fr 1fr;
+  padding:var(--space-3) var(--space-4);
+  background:var(--surface-3);
+  font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;
+}
+.db-table-row{
+  display:grid;grid-template-columns:2fr 1fr 1fr;
+  padding:var(--space-3) var(--space-4);
+  border-top:1px solid var(--border-2);
+  font-size:11px;color:var(--text-2);
+  transition:background var(--transition);
+}
+.db-table-row:hover{background:var(--surface-3)}
+.db-table-val{color:var(--text);font-weight:600;font-variant-numeric:tabular-nums}
+
+/* Mapa mini */
+.db-map{
+  grid-column:span 2;
+  background:var(--surface-2);border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  display:flex;align-items:center;justify-content:center;
+  min-height:140px;
+  position:relative;overflow:hidden;
+}
+.map-placeholder{
+  display:flex;flex-direction:column;align-items:center;gap:var(--space-2);
+  color:var(--text-3);font-size:var(--text-xs);
+}
+
+.dashboard-layout{display:block}
+.findings-panel{display:flex;flex-direction:column;gap:var(--space-4)}
+.finding-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:var(--space-5);
+  transition:border-color var(--transition),box-shadow var(--transition);
+}
+.finding-card:hover{border-color:rgba(80,160,174,0.35);box-shadow:var(--shadow)}
+.finding-num{
+  font-family:var(--font-display);font-size:var(--text-xl);
+  font-weight:700;line-height:1;margin-bottom:6px;
+}
+.finding-num.teal{color:var(--teal)}
+.finding-num.amber{color:var(--amber)}
+.finding-num.green{color:var(--green)}
+.finding-desc{font-size:var(--text-xs);color:var(--text-2);line-height:1.5}
+.finding-label{font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:4px}
+
+/* ═══════════════════════════════════════════
+   SECCIÓN 2 — PYTHON ETL
+═══════════════════════════════════════════ */
+.flow-icon{
+  width:36px;height:36px;border-radius:var(--radius-md);
+  display:grid;place-items:center;font-size:1.1rem;flex-shrink:0;
+}
+.flow-icon.teal{background:var(--teal-dim)}
+.flow-icon.amber{background:var(--amber-dim)}
+.flow-icon.green{background:var(--green-dim)}
+.flow-icon.red{background:rgba(224,92,106,0.12)}
+.flow-node-name{font-size:var(--text-sm);font-weight:700;color:var(--text);margin-bottom:2px}
+.flow-node-sub{font-size:var(--text-xs);color:var(--text)}
+/* Flujo horizontal */
+.flow-h{
+  display:flex;align-items:center;gap:var(--space-2);width:100%;
+  padding:var(--space-6) var(--space-4);
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-xl);
+}
+.flow-h-step{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  text-align:center;gap:var(--space-2);
+  padding:var(--space-4) var(--space-3);
+  background:var(--surface-2);border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+}
+.flow-h-arr{color:var(--teal);font-size:1.1rem;flex-shrink:0;line-height:1}
+.flow-h-log{
+  margin-top:var(--space-3);
+  display:flex;align-items:center;gap:var(--space-3);
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-left:3px solid var(--teal);
+  border-radius:var(--radius-lg);
+  padding:var(--space-3) var(--space-6);
+  font-size:var(--text-sm);color:var(--text-2);
+}
+
+/* Snippet de código */
+.code-block{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-xl);
+  overflow:hidden;
+  font-family:var(--font-code);
+  font-size:12px;
+  line-height:1.65;
+}
+.code-header{
+  display:flex;align-items:center;gap:var(--space-3);
+  padding:var(--space-3) var(--space-5);
+  background:var(--surface-2);
+  border-bottom:1px solid var(--border);
+}
+.code-dots{display:flex;gap:6px}
+.code-filename{font-size:11px;color:var(--text-2);font-family:var(--font-code)}
+.code-body{padding:var(--space-6);overflow-x:auto}
+.code-body pre{margin:0}
+.kw{color:#c792ea}   /* keyword */
+.fn{color:#82aaff}   /* function */
+.st{color:#c3e88d}   /* string */
+.cm{color:#546e7a}   /* comment */
+.nm{color:#f78c6c}   /* number */
+.vr{color:#eeffff}   /* variable */
+.bi{color:#ffcb6b}   /* builtin */
+
+/* ═══════════════════════════════════════════
+   SECCIÓN 3 — SQL STAR SCHEMA
+═══════════════════════════════════════════ */
+.sql-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:var(--space-8);align-items:start;
+}
+/* Star schema SVG diagram */
+.schema-diagram{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-xl);
+  padding:var(--space-8);
+  display:flex;flex-direction:column;align-items:center;gap:var(--space-6);
+}
+.schema-title-sm{font-size:var(--text-xs);color:var(--text-2);text-transform:uppercase;letter-spacing:0.08em;font-weight:700;align-self:flex-start}
+.schema-svg-wrap{width:100%;max-width:480px;margin:0 auto}
+
+.sql-right{display:flex;flex-direction:column;gap:var(--space-6)}
+.sql-stats-row{display:flex;gap:var(--space-4)}
+.sql-stat{
+  flex:1;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:var(--space-4) var(--space-5);
+  text-align:center;
+}
+.sql-stat-val{font-family:var(--font-display);font-size:var(--text-xl);color:var(--teal);font-weight:700}
+.sql-stat-label{font-size:10px;color:var(--text-2);text-transform:uppercase;letter-spacing:0.06em;margin-top:4px}
+
+/* Query card */
+.query-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-xl);overflow:hidden;
+}
+.query-result{
+  padding:var(--space-4) var(--space-5);
+  border-top:1px solid var(--border);
+}
+.qr-label{font-size:10px;color:var(--teal);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:var(--space-3)}
+.qr-row{
+  display:grid;grid-template-columns:1fr 1fr 1fr 1fr;
+  gap:var(--space-2);padding:var(--space-2) 0;
+  border-bottom:1px solid var(--border-2);
+  font-size:11px;
+}
+.qr-row.head{color:var(--text-3);font-weight:700;text-transform:uppercase;letter-spacing:0.04em}
+.qr-row:not(.head){color:var(--text-2)}
+.qr-val{font-variant-numeric:tabular-nums;color:var(--text);font-weight:600}
+
+/* ═══════════════════════════════════════════
+   SECCIÓN 4 — HALLAZGOS
+═══════════════════════════════════════════ */
+.findings-grid{display:flex;flex-direction:column;gap:var(--space-8)}
+.finding-big{
+  display:grid;grid-template-columns:190px 1fr;
+  gap:var(--space-8);align-items:center;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-xl);
+  padding:var(--space-8);
+  transition:border-color var(--transition),box-shadow var(--transition);
+}
+.finding-big:hover{border-color:rgba(80,160,174,0.3);box-shadow:var(--shadow)}
+.finding-big-num{
+  font-family:var(--font-display);
+  font-size:clamp(3.5rem,6vw,6rem);
+  line-height:1;font-weight:700;
+  letter-spacing:-0.04em;
+}
+.fb-teal{color:var(--teal)}
+.fb-amber{color:var(--amber)}
+.fb-green{color:var(--green)}
+.finding-big-content{}
+.finding-big-title{font-size:var(--text-xl);font-weight:700;color:var(--text);margin-bottom:var(--space-2);line-height:1.2}
+.finding-big-desc{font-size:var(--text-sm);color:var(--text-2);margin-bottom:var(--space-6);line-height:1.65}
+.finding-tag{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
+  padding:3px 10px;border-radius:var(--radius-full);
+  border:1px solid var(--border);color:var(--text-2);
+  margin-right:var(--space-2);
+}
+
+/* Mini vis inline */
+.inline-bars{
+  display:flex;align-items:flex-end;gap:3px;height:48px;
+  margin-top:var(--space-4);
+}
+.ib{flex:1;border-radius:2px 2px 0 0;background:var(--teal);opacity:0.4}
+.ib.hi{opacity:1;background:var(--amber)}
+
+/* ═══════════════════════════════════════════
+   CTA FINAL
+═══════════════════════════════════════════ */
+.cta-section{
+  text-align:center;
+  background:var(--bg-2);
+  border-top:1px solid var(--border);
+}
+.cta-section .section-title{font-size:var(--text-2xl)}
+.cta-links{display:flex;justify-content:center;gap:var(--space-4);flex-wrap:wrap;margin-top:var(--space-8)}
+.cta-footnote{margin-top:var(--space-8);font-size:var(--text-xs);color:var(--text-2)}
+.cta-footnote a{color:var(--text-3);text-decoration:underline;text-decoration-color:transparent;transition:text-decoration-color var(--transition)}
+.cta-footnote a:hover{text-decoration-color:var(--text-3)}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+.footer{
+  padding:var(--space-6) var(--space-8);
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:var(--text-xs);color:var(--text-3);
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media(max-width:768px){
+  .nav{padding:var(--space-2) var(--space-4);gap:2px}
+  .nav-logo{font-size:clamp(1rem,3.5vw,1.25rem)}
+  .nav-right{gap:var(--space-3);width:100%}
+  .nav-links{
+    flex:1;overflow-x:auto;gap:var(--space-4);
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  }
+  .nav-links::-webkit-scrollbar{display:none}
+  .nav-links a{font-size:0.75rem;white-space:nowrap}
+  .etl-grid,.sql-grid{grid-template-columns:1fr}
+  .finding-big{grid-template-columns:1fr}
+  .finding-big-num{font-size:3rem}
+  .dashboard-body{grid-template-columns:1fr 1fr}
+  .footer{flex-direction:column;gap:var(--space-3);text-align:center}
+
+  /* ETL flow — vertical en móvil */
+  .flow-h{flex-direction:column;align-items:stretch;padding:var(--space-4)}
+  .flow-h-step{flex:none;flex-direction:row;text-align:left;padding:var(--space-3) var(--space-4)}
+  .flow-h-arr{align-self:center;transform:rotate(90deg)}
+  .flow-h-log{padding:var(--space-3) var(--space-4);gap:var(--space-2)}
+}
+</style>
+</head>
+<body>
+
+
+<!-- ══════════════════════════════════════════
+     NAV
+══════════════════════════════════════════ -->
+<nav class="nav">
+  <div class="nav-logo">Mariabelén Dumont Portfolio — Retail Analytics</div>
+  <div class="nav-right">
+    <nav class="nav-links">
+      <a href="#dashboard">Dashboard Power BI</a>
+      <a href="#python">Python Automatización</a>
+      <a href="#sql">SQL</a>
+      <a href="#hallazgos">Python EDA</a>
+      <a href="https://github.com/MariabelenDumont" target="_blank" rel="noopener">Ver en GitHub</a>
+    </nav>
+    <button class="theme-btn" data-theme-toggle aria-label="Cambiar tema">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     SECCIÓN 1 — DASHBOARD
+══════════════════════════════════════════ -->
+<section class="section section-alt" id="dashboard" style="padding-top:calc(clamp(4rem,8vw,6rem) + 85px)">
+  <div class="container-wide">
+    <div class="reveal">
+      <div class="section-eyebrow">Power BI de punta a punta: Power Query, modelado, medidas DAX y reportes de alto impacto visual</div>
+      <h2 class="section-title" style="max-width:100%">Este dashboard se puede consultar, diario, semanal o mensual de forma programada.</h2>
+      <p class="section-desc" style="max-width:100%">
+        Dashboard de analítica comercial para retail: 150 tiendas, 5 canales y 5 eventos anuales. 
+        Modelo dimensional con esquema en estrella, 
+        con medidas DAX (YoY, MTD/YTD, participación por canal) y Power Query optimizado. 
+        Se puede configurar con actualizaciones automáticas diaria, sin intervención manual.
+      </p>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;margin-bottom:var(--space-3)">
+      <a href="https://github.com/MariabelenDumont" target="_blank" rel="noopener" class="btn btn-ghost" style="font-size:var(--text-xs)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        Ver código del proyecto Power BI en GitHub
+      </a>
+    </div>
+    <div class="dashboard-layout reveal">
+      <!-- Dashboard simulado -->
+      <div class="dashboard-wrap">
+        <div class="dashboard-titlebar">
+          <div class="titlebar-dots">
+            <div class="dot dot-r"></div>
+            <div class="dot dot-y"></div>
+            <div class="dot dot-g"></div>
+          </div>
+          <div class="titlebar-label" style="color:#fff">TechStore.cl — Retail Dashboard 2024-2025 · Power BI</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.5)">Actualizado hoy</div>
+        </div>
+        <div class="pbi-embed">
+          <iframe
+            title="retail_analytics"
+            src="https://app.powerbi.com/view?r=eyJrIjoiZDBiY2I5NTgtOTg2Mi00MzQ4LWJmNzAtNjgwMTE5NTQxMzVjIiwidCI6IjU5OTFlMmY1LTc2M2MtNDc5MS04MjgzLWNhOWM5ZWEyNTdkYiJ9"
+            frameborder="0"
+            allowfullscreen="true"
+          ></iframe>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECCIÓN 2 — PYTHON ETL
+══════════════════════════════════════════ -->
+<section class="section" id="python">
+  <div class="container-wide">
+    <div class="reveal">
+      <div class="section-eyebrow">Python · Pipeline automatizado · ( ETL + APIs + subida a SQL )</div>
+      <h2 class="section-title" style="max-width:100%">Antes de crear el Dashboard de Power BI, se prepararon los datos que consumirá el informe.</h2>
+      <p class="section-desc" style="max-width:100%">
+        Solución de integración de datos en Python que consume la API del Banco Central,
+        la cruza con registros de ventas del sistema transaccional
+        y genera un dataset consolidado con indicadores macroeconómicos y métricas comerciales alineadas por fecha.
+        Los datos se normalizan, se validan y se cargan automáticamente en una base de datos PostgreSQL.
+        Arquitectura ETL con control de errores, logging y ejecución programada sin intervención manual.
+      </p>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;margin-bottom:var(--space-3)">
+      <a href="https://github.com/MariabelenDumont" target="_blank" rel="noopener" class="btn btn-ghost" style="font-size:var(--text-xs)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        Ver código Python en GitHub
+      </a>
+    </div>
+    <!-- Diagrama de flujo horizontal -->
+    <div class="flow-h reveal">
+      <div class="flow-h-step">
+        <div class="flow-icon teal">🏦</div>
+        <div class="flow-node-name">API</div>
+        <div class="flow-node-sub">Banco Central · UF, Dólar, IPC, IMACEC, UTM <br> <br> </div>
+      </div>
+      <div class="flow-h-arr">→</div>
+      <div class="flow-h-step">
+        <div class="flow-icon amber">🐍</div>
+        <div class="flow-node-name">Cruce de datos</div>
+        <div class="flow-node-sub">Api con ventas del sistema transaccional del período</div>
+      </div>
+      <div class="flow-h-arr">→</div>
+      <div class="flow-h-step">
+        <div class="flow-icon amber">🧹</div>
+        <div class="flow-node-name">Limpieza</div>
+        <div class="flow-node-sub">Limpiar · ajustar · normalizar <br> <br></div>
+      </div>
+      <div class="flow-h-arr">→</div>
+      <div class="flow-h-step">
+        <div class="flow-icon amber">✅</div>
+        <div class="flow-node-name">Validación</div>
+        <div class="flow-node-sub">Integridad y consistencia de datos <br> <br></div>
+      </div>
+      <div class="flow-h-arr">→</div>
+      <div class="flow-h-step">
+        <div class="flow-icon green">🗄️</div>
+        <div class="flow-node-name">PostgreSQL 15</div>
+        <div class="flow-node-sub">731 días · 21.603 ventas <br> <br> <br></div>
+      </div>
+    </div>
+    <div class="flow-h-log reveal reveal-delay-1">
+      <span>📋</span>
+      <span style="color:var(--text)">Sistema de logs y manejo de errores — activo en cada etapa del pipeline</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECCIÓN 3 — SQL
+══════════════════════════════════════════ -->
+<section class="section section-alt" id="sql">
+  <div class="container-wide">
+    <div class="reveal">
+      <div class="section-eyebrow">PostgreSQL · Star Schema · Stored Procedures</div>
+      <h2 class="section-title">Arquitectura de datos: diseño, optimización y disponibilización.</h2>
+      <p class="section-desc" style="max-width:100%">
+        Los datos crudos no tienen estructura para responder preguntas de negocio.
+        Diseñé el modelo estrella que los organiza: hechos separados de atributos, dimensiones reutilizables.
+        El pipeline ETL en Python extrae, transforma y carga los datos directamente en PostgreSQL, 
+        desde donde quedan disponibles para su consumo por el dashboard de Power BI. 
+        Todo soportado en 5 tablas, 4 vistas, 2 stored procedures y 8 índices bien ubicados.      
+      </p>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;margin-top:var(--space-8);margin-bottom:var(--space-3)">
+      <a href="https://github.com/MariabelenDumont" target="_blank" rel="noopener" class="btn btn-ghost" style="font-size:var(--text-xs);display:inline-flex;align-items:center;gap:6px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        Ver código SQL en GitHub
+      </a>
+    </div>
+    <div class="schema-diagram reveal">
+        <div class="schema-title-sm">Modelo estrella — 5 tablas · PostgreSQL</div>
+        <div class="schema-svg-wrap">
+          <svg viewBox="0 0 340 300" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L6,3 Z" fill="rgba(80,160,174,0.5)"/>
+              </marker>
+            </defs>
+            <!-- Líneas al centro -->
+            <line x1="170" y1="75" x2="170" y2="125" stroke="rgba(80,160,174,0.3)" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+            <line x1="170" y1="225" x2="170" y2="175" stroke="rgba(80,160,174,0.3)" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+            <line x1="85" y1="150" x2="125" y2="150" stroke="rgba(80,160,174,0.3)" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+            <line x1="255" y1="150" x2="215" y2="150" stroke="rgba(80,160,174,0.3)" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+            <line x1="84" y1="72" x2="134" y2="130" stroke="rgba(80,160,174,0.3)" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+
+            <!-- FACT CENTER -->
+            <rect x="120" y="125" width="100" height="50" rx="8" fill="#1c2130" stroke="#50a0ae" stroke-width="1.5"/>
+            <text x="170" y="146" text-anchor="middle" fill="#50a0ae" font-size="10" font-family="JetBrains Mono,monospace" font-weight="600">fact_ventas</text>
+            <text x="170" y="160" text-anchor="middle" fill="#c8cedd" font-size="8" font-family="JetBrains Mono,monospace">21.603 filas</text>
+
+            <!-- dim_tiempo -->
+            <rect x="120" y="20" width="100" height="48" rx="8" fill="#1c2130" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <text x="170" y="40" text-anchor="middle" fill="#c8cedd" font-size="10" font-family="JetBrains Mono,monospace">dim_tiempo</text>
+            <text x="170" y="55" text-anchor="middle" fill="#c8cedd" font-size="8" font-family="JetBrains Mono,monospace">731 fechas</text>
+
+            <!-- dim_producto -->
+            <rect x="240" y="125" width="95" height="48" rx="8" fill="#1c2130" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <text x="287" y="145" text-anchor="middle" fill="#c8cedd" font-size="10" font-family="JetBrains Mono,monospace">dim_producto</text>
+            <text x="287" y="160" text-anchor="middle" fill="#c8cedd" font-size="8" font-family="JetBrains Mono,monospace">150 SKUs</text>
+
+            <!-- dim_cliente -->
+            <rect x="5" y="125" width="95" height="48" rx="8" fill="#1c2130" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <text x="52" y="145" text-anchor="middle" fill="#c8cedd" font-size="10" font-family="JetBrains Mono,monospace">dim_cliente</text>
+            <text x="52" y="160" text-anchor="middle" fill="#c8cedd" font-size="8" font-family="JetBrains Mono,monospace">2.500 clientes</text>
+
+            <!-- dim_tiempo (abajo) → indicadores -->
+            <rect x="120" y="232" width="100" height="48" rx="8" fill="#1c2130" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <text x="170" y="251" text-anchor="middle" fill="#c8cedd" font-size="8" font-family="JetBrains Mono,monospace">dim_indicadores</text>
+            <text x="170" y="263" text-anchor="middle" fill="#c8cedd" font-size="8" font-family="JetBrains Mono,monospace">económicos</text>
+            <text x="170" y="275" text-anchor="middle" fill="#c8cedd" font-size="7" font-family="JetBrains Mono,monospace">UF·$·IPC·IMACEC</text>
+
+            <!-- dim_canal (esquina) -->
+            <rect x="5" y="20" width="95" height="48" rx="8" fill="#1c2130" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <text x="52" y="39" text-anchor="middle" fill="#c8cedd" font-size="10" font-family="JetBrains Mono,monospace">dim_canal</text>
+            <text x="52" y="54" text-anchor="middle" fill="#c8cedd" font-size="8" font-family="JetBrains Mono,monospace">+ eventos</text>
+          </svg>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECCIÓN 4 — HALLAZGOS
+══════════════════════════════════════════ -->
+<section class="section" id="hallazgos">
+  <div class="container-wide">
+    <div class="reveal">
+      <div class="section-eyebrow">Python EDA · Análisis Exploratorio · Estadística Descriptiva</div>
+      <h2 class="section-title" style="max-width:100%">Se realiza un análisis exploratorio de los datos.</h2>
+      <p class="section-desc" style="max-width:100%">
+        Cuando los datos que se muestran en un dashboard no son suficientes,
+        un análisis exploratorio puede revelar patrones ocultos, tendencias y oportunidades de negocio.
+        En esta sección te muestro 6 hallazgos clave que surgieron al analizar el dataset de ventas, 
+        con insights accionables para la toma de decisiones estratégicas en retail.
+      </p>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;margin-bottom:var(--space-3)">
+      <a href="https://github.com/MariabelenDumont" target="_blank" rel="noopener" class="btn btn-ghost" style="font-size:var(--text-xs);display:inline-flex;align-items:center;gap:6px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        Ver EDA en GitHub
+      </a>
+    </div>
+
+    <div class="findings-grid">
+      <!-- Hallazgo 1 -->
+      <div class="finding-big reveal">
+        <div class="finding-big-num fb-amber">+270%</div>
+        <div class="finding-big-content">
+          <h3 class="finding-big-title">Black Friday y CyberDay dominan el calendario — ambos superan el +248%.</h3>
+          <p class="finding-big-desc">
+            Black Friday lidera con +270% de uplift; CyberDay sigue con +248%. Ambos eventos
+            superan ampliamente al resto del año. El equipo de compras debe prepararse para
+            noviembre y junio con la misma prioridad.
+          </p>
+          <span class="finding-tag">Estacionalidad YoY</span>
+          <span class="finding-tag">Uplift por evento</span>
+          <div class="impact-box" style="margin-top:var(--space-6)">
+            <div class="impact-icon">💡</div>
+            <div>
+              <div class="impact-label">Decisión que cambia</div>
+              <div class="impact-text">Pre-cargar inventario crítico 3 semanas antes de noviembre y junio. Concentrar el 40% del presupuesto anual de marketing en Black Friday + CyberDay.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hallazgo 2 -->
+      <div class="finding-big reveal">
+        <div class="finding-big-num fb-teal">46/80</div>
+        <div class="finding-big-content">
+          <h3 class="finding-big-title">El catálogo está bien balanceado — 69 SKUs generan el 80%.</h3>
+          <p class="finding-big-desc">
+            La regla clásica 80/20 dice que el 20% debería bastar. Aquí se necesita el 46%.
+            No hay 2-3 productos "salvadores" que concentren todo el valor — menor riesgo de stockout crítico.
+          </p>
+          <span class="finding-tag">Pareto ABC</span>
+          <span class="finding-tag">Gestión de inventario</span>
+          <div class="impact-box" style="margin-top:var(--space-6)">
+            <div class="impact-icon">💡</div>
+            <div>
+              <div class="impact-label">Decisión que cambia</div>
+              <div class="impact-text">Clase A (69 prods): stock mínimo de 3 semanas antes de cada evento. Clase C (39 prods): evaluar descatalogación para liberar capital de trabajo.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hallazgo 3 -->
+      <div class="finding-big reveal">
+        <div class="finding-big-num fb-amber" style="font-size:clamp(2.8rem,5vw,5.5rem)">r = −0.06</div>
+        <div class="finding-big-content">
+          <h3 class="finding-big-title">El dólar no mueve las ventas en el corto plazo.</h3>
+          <p class="finding-big-desc">
+            Correlación prácticamente nula entre el tipo de cambio diario y las ventas.
+            Los clientes de tecnología en Chile son inelásticos al dólar en el corto plazo:
+            postergan, pero no cancelan.
+          </p>
+          <span class="finding-tag">Correlación Pearson</span>
+          <span class="finding-tag">Indicadores macro</span>
+          <span class="finding-tag">Pricing</span>
+          <div class="impact-box" style="margin-top:var(--space-6)">
+            <div class="impact-icon">💡</div>
+            <div>
+              <div class="impact-label">Decisión que cambia</div>
+              <div class="impact-text">No aplicar descuentos defensivos ante variaciones puntuales del dólar. Monitorear tendencia de 90 días como indicador adelantado de demanda, no el valor diario.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hallazgo 4 -->
+      <div class="finding-big reveal">
+        <div class="finding-big-num fb-teal">44%</div>
+        <div class="finding-big-content">
+          <h3 class="finding-big-title">Smartphones concentra el 44% del ingreso — con el margen más bajo del catálogo.</h3>
+          <p class="finding-big-desc">
+            Smartphones genera $4.64B (44.3% del total) pero con ~24% de margen bruto.
+            Accesorios, con solo el 8.1% del ingreso, tiene ~38% de margen — casi el doble —
+            y menor exposición al riesgo cambiario.
+          </p>
+          <span class="finding-tag">Análisis de categorías</span>
+          <span class="finding-tag">Margen bruto</span>
+          <div class="impact-box" style="margin-top:var(--space-6)">
+            <div class="impact-icon">💡</div>
+            <div>
+              <div class="impact-label">Decisión que cambia</div>
+              <div class="impact-text">Aumentar cross-selling de Accesorios en el checkout de Smartphones. Meta: reducir dependencia de Smartphones del 44% al 38% en 2026.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hallazgo 5 -->
+      <div class="finding-big reveal">
+        <div class="finding-big-num fb-amber" style="font-size:clamp(2.8rem,5vw,5.5rem)">M + 1</div>
+        <div class="finding-big-content">
+          <h3 class="finding-big-title">La retención cae en el primer mes — el mayor punto de fuga del negocio.</h3>
+          <p class="finding-big-desc">
+            Las cohortes muestran una caída significativa entre la primera compra y el mes 1.
+            Las cohortes más antiguas retienen mejor que las recientes, lo que sugiere
+            que el canal de adquisición reciente trae clientes de menor calidad de vida.
+          </p>
+          <span class="finding-tag">Análisis de cohortes</span>
+          <span class="finding-tag">Retención</span>
+          <span class="finding-tag">CRM</span>
+          <div class="impact-box" style="margin-top:var(--space-6)">
+            <div class="impact-icon">💡</div>
+            <div>
+              <div class="impact-label">Decisión que cambia</div>
+              <div class="impact-text">Email automático a los 15 días post-compra. Flujo de onboarding: review del producto + oferta de garantía extendida. Analizar retención por canal para optimizar CAC.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hallazgo 6 -->
+      <div class="finding-big reveal">
+        <div class="finding-big-num fb-teal" style="font-size:clamp(2.8rem,5vw,5.5rem)">×1.6</div>
+        <div class="finding-big-content">
+          <h3 class="finding-big-title">Accesorios y Smartphones co-ocurren en el carrito — el margen del bundle es 1.6× mayor.</h3>
+          <p class="finding-big-desc">
+            El análisis de Market Basket identifica co-ocurrencia frecuente entre Smartphones
+            y Accesorios. Accesorios tiene ~38% de margen vs ~24% de Smartphones:
+            cada bundle vendido mejora el margen total del ticket de forma directa.
+          </p>
+          <span class="finding-tag">Market Basket</span>
+          <span class="finding-tag">Cross-selling</span>
+          <span class="finding-tag">A/B testing</span>
+          <div class="impact-box" style="margin-top:var(--space-6)">
+            <div class="impact-icon">💡</div>
+            <div>
+              <div class="impact-label">Decisión que cambia</div>
+              <div class="impact-text">Bundle dinámico en checkout: mostrar los 3 accesorios más comprados junto al modelo de smartphone seleccionado. Paquete "Smartphone + Protección" con 10% de descuento.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CTA FINAL
+══════════════════════════════════════════ -->
+<section class="section cta-section" id="contacto">
+  <div class="container-wide">
+    <div class="reveal" style="text-align:center">
+      <div class="section-eyebrow" style="justify-content:center">¿Hablamos?</div>
+      <h2 class="section-title" style="font-size:var(--text-2xl)">
+        Disponible para posiciones de analista de datos <br> y proyectos de BI en Chile
+      </h2>
+      <div class="cta-links">
+        <a href="mailto:mariabelen.dumont.s@gmail.com" class="btn btn-primary">mariabelen.dumont.s@gmail.com</a>
+        <a href="https://www.linkedin.com/in/mariabelen-dumonts/" target="_blank" class="btn btn-ghost">LinkedIn</a>
+        <a href="https://github.com/MariabelenDumont" target="_blank" class="btn btn-ghost" style="display:inline-flex;align-items:center;gap:6px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          Ver portfolio completo en GitHub
+        </a>
+      </div>
+      <p class="cta-footnote">
+        <a href="https://github.com/MariabelenDumont" target="_blank">data-analyst-portfolio</a>
+        · Python · PostgreSQL · Power BI
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer class="footer">
+  <span>© 2026 Mariabelén Dumont · Santiago, Chile</span>
+  <span>Datos del Banco Central de Chile vía <a href="https://mindicador.cl" target="_blank" style="color:var(--text-3)">mindicador.cl</a> 🇨🇱</span>
+</footer>
+
+<script>
+// ── Theme toggle
+(function(){
+  const btn = document.querySelector('[data-theme-toggle]');
+  const root = document.documentElement;
+  let theme = 'dark';
+  const icons = {
+    dark: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',
+    light: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+  };
+  btn.innerHTML = icons[theme];
+  btn.addEventListener('click', () => {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', theme);
+    btn.innerHTML = icons[theme];
+  });
+})();
+
+// ── Scroll reveal
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.1, rootMargin: '0px 0px -40px 0px'});
+  els.forEach(el => io.observe(el));
+  // Trigger hero immediately
+  document.querySelectorAll('.hero .reveal').forEach(el => {
+    setTimeout(() => el.classList.add('visible'), 100);
+  });
+})();
+
+// ── Nav active state on scroll
+(function(){
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        links.forEach(l => l.style.color = '');
+        const active = document.querySelector('.nav-links a[href="#'+e.target.id+'"]');
+        if(active) active.style.color = 'var(--teal)';
+      }
+    });
+  }, {threshold: 0.5});
+  sections.forEach(s => io.observe(s));
+})();
+</script>
+</body>
+</html>

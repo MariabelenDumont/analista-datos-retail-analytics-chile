@@ -1,0 +1,93 @@
+table dim_cliente
+	lineageTag: 56f5d0c9-4c6e-4e48-8474-c998e6db573b
+
+	column cliente_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 64715934-3a20-433c-a201-cd5e957492c6
+		summarizeBy: none
+		sourceColumn: cliente_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column nombre
+		dataType: string
+		lineageTag: c3d3726e-463e-49fd-8420-7d479b22fe3a
+		summarizeBy: none
+		sourceColumn: nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column email
+		dataType: string
+		lineageTag: 9c5dfeb9-44ea-40aa-8c42-ba20315f2ede
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		lineageTag: 35273fff-a7f4-42a8-82df-63526736f026
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column comuna
+		dataType: string
+		lineageTag: 03e1c566-abb5-44c6-9f1a-4dda64db5594
+		summarizeBy: none
+		sourceColumn: comuna
+
+		annotation SummarizationSetBy = Automatic
+
+	column segmento_rfm
+		dataType: string
+		lineageTag: dcfaeefe-234e-4550-ac8c-febc13af20f4
+		summarizeBy: none
+		sourceColumn: segmento_rfm
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_registro
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 82143952-b4c6-4156-97d0-cdd6056c3992
+		summarizeBy: none
+		sourceColumn: fecha_registro
+
+		variation Variation
+			isDefault
+			relationship: e23e3be8-f250-4be7-bbf4-6ad5d3618474
+			defaultHierarchy: LocalDateTable_88bfb396-86a5-4a41-b2ae-483c74e7a9aa.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column canal_adquisicion
+		dataType: string
+		lineageTag: ef53d925-be47-41ec-86b7-21d9a047fb2a
+		summarizeBy: none
+		sourceColumn: canal_adquisicion
+
+		annotation SummarizationSetBy = Automatic
+
+	column País = "Chile"
+		lineageTag: 5177c7f5-d68b-4eb9-a49f-1b34d1c8d49c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_cliente = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "portfolio_data_analytics"),
+				    retail_dim_cliente = Source{[Schema="retail",Item="dim_cliente"]}[Data]
+				in
+				    retail_dim_cliente
+
+	annotation PBI_ResultType = Table
+
