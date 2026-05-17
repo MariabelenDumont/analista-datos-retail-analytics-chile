@@ -72,8 +72,8 @@ retail-analytics-chile/
 
 ### 1. Clonar e instalar dependencias
 ```bash
-git clone https://github.com/MariabelenDumont
-cd data-analyst-portfolio/retail-analytics-chile
+git clone https://github.com/MariabelenDumont/analista-datos-retail-analytics-chile
+cd analista-datos-retail-analytics-chile
 pip install -r requirements.txt
 ```
 
@@ -181,7 +181,7 @@ Ver análisis completo en `05_docs/insights_findings.md`
 
 **Mariabelén Dumont**  
 Analista de Datos · Santiago, Chile  
-[LinkedIn] https://www.linkedin.com/in/mariabelen-dumonts · [Portfolio](https://github.com/MariabelenDumont)
+[LinkedIn](https://www.linkedin.com/in/mariabelen-dumonts) · [Portfolio](https://github.com/MariabelenDumont)
 
 ---
 
